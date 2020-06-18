@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flex: '1 1 auto',
     overflow: 'hidden',
-    paddingTop: 58,
+    paddingTop: 60,
     [theme.breakpoints.up('lg')]: {
       paddingLeft: 256
     }

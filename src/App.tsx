@@ -13,6 +13,7 @@ import {
 import Auth from "components/Auth";
 import SettingsNotification from "components/SettingsNotification";
 import ScrollReset from "components/ScrollReset";
+import GAListener from "components/GAListener";
 import useSettings from "hooks/useSettings.jsx";
 import { createTheme } from "theme";
 import Routes from 'Routes';
@@ -56,11 +57,13 @@ function App() {
       <StylesProvider jss={jss}>
         <SnackbarProvider maxSnack={1}>
           <Router history={history}>
+          <GAListener trackingId="UA-169878160-1">
             <Auth>
             <ScrollReset />
             <SettingsNotification />
             <Routes />
             </Auth>
+            </GAListener>
           </Router>
         </SnackbarProvider>
       </StylesProvider>

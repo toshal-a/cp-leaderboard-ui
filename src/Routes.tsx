@@ -43,6 +43,11 @@ const routesConfig = [
         path: '/app/account',
         component: lazy(() => import('views/pages/AccountView'))
       },
+     /* {
+        exact: true,
+        path: '/app/contest',
+        component: lazy(() => import('views/Contest'))
+      },*/
       {
         exact: true,
         path: '/app/leaderboard',
