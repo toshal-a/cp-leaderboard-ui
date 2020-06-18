@@ -1,24 +1,22 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useLocation, matchPath } from 'react-router';
 import { Link as RouterLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import PropTypes from 'prop-types';
-import {
-  Avatar,
-  Box,
-  Chip,
-  Divider,
-  Drawer,
-  Hidden,
-  Link,
-  List,
-  ListSubheader,
-  Typography,
-  makeStyles
-} from '@material-ui/core';
+import Avatar from '@material-ui/core/Avatar';
+import Box from '@material-ui/core/Box';
+import Chip from '@material-ui/core/Chip';
+import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
+import Hidden from '@material-ui/core/Hidden';
+import Link from '@material-ui/core/Link';
+import List from '@material-ui/core/List';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import Typography from '@material-ui/core/Typography';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 import {
   Activity as ActivityIcon,
   Trello as TrelloIcon,
@@ -146,7 +144,7 @@ function NavBar({ openMobile, onMobileClose, }) {
   const location = useLocation();
   const { user } = useSelector((state) => state.login);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (openMobile && onMobileClose) {
       onMobileClose();
     }

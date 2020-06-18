@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 import NavBar from './NavBar';
 import TopBar from './TopBar';
 
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flex: '1 1 auto',
     overflow: 'hidden',
-    paddingTop: 64,
+    paddingTop: 58,
     [theme.breakpoints.up('lg')]: {
       paddingLeft: 256
     }
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 function DashboardLayout({ children }) {
   const classes = useStyles();
-  const [isMobileNavOpen, setMobileNavOpen] = useState(false);
+  const [isMobileNavOpen, setMobileNavOpen] = React.useState(false);
 
   return (
     <div className={classes.root}>

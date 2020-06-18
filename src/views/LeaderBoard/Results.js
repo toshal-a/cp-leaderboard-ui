@@ -2,32 +2,26 @@
 import React, { useState } from "react";
 import clsx from "clsx";
 import PropTypes from "prop-types";
-import PerfectScrollbar from "react-perfect-scrollbar";
-import {
-  Avatar,
-  Box,
-  Card,
-  Divider,
-  IconButton,
-  InputAdornment,
-  Link,
-  SvgIcon,
-  Tab,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TablePagination,
-  TableRow,
-  Tabs,
-  TextField,
-  Typography,
-  makeStyles,
-} from "@material-ui/core";
-import {
-  ArrowRight as ArrowRightIcon,
-  Search as SearchIcon,
-} from "react-feather";
+import Avatar from '@material-ui/core/Avatar';
+import AppBar from '@material-ui/core/AppBar';
+import Box from '@material-ui/core/Box';
+import Card from '@material-ui/core/Card';
+import Divider from '@material-ui/core/Divider';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Link from '@material-ui/core/Link';
+import SvgIcon from '@material-ui/core/SvgIcon';
+import Tab from '@material-ui/core/Tab';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TablePagination from '@material-ui/core/TablePagination';
+import TableRow from '@material-ui/core/TableRow';
+import Tabs from '@material-ui/core/Tabs';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import makeStyles from '@material-ui/core/styles/makeStyles';
+import { Search as SearchIcon } from "react-feather";
 import getInitials from "utils/getInitials";
 
 const tabs = [
@@ -138,29 +132,17 @@ function applySort(customers, sort) {
 }
 
 const useStyles = makeStyles((theme) => ({
-  root: {},
+  root: { flexGrow: 1 },
   queryField: {
     width: 500,
-  },
-  bulkOperations: {
-    position: "relative",
-  },
-  bulkActions: {
-    paddingLeft: 4,
-    paddingRight: 4,
-    marginTop: 6,
-    position: "absolute",
-    width: "100%",
-    zIndex: 2,
-    backgroundColor: theme.palette.background.default,
-  },
-  bulkAction: {
-    marginLeft: theme.spacing(2),
   },
   avatar: {
     height: 42,
     width: 42,
     marginRight: theme.spacing(1),
+  },
+  tablePagination: {
+    bottom: 0,
   },
 }));
 
@@ -168,7 +150,7 @@ function Results({ className, customers, ...rest }) {
   const classes = useStyles();
   const [currentTab, setCurrentTab] = useState("all");
   const [page, setPage] = useState(0);
-  const [limit, setLimit] = useState(5);
+  const [limit, setLimit] = useState(10);
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState(sortOptions[0].value);
   const [filters, setFilters] = useState({
@@ -220,63 +202,65 @@ function Results({ className, customers, ...rest }) {
   const paginatedCustomers = applyPagination(sortedCustomers, page, limit);
 
   return (
-    <Card className={clsx(classes.root, className)} {...rest}>
-      <Tabs
-        onChange={handleTabsChange}
-        scrollButtons="auto"
-        textColor="secondary"
-        value={currentTab}
-        variant="scrollable"
-      >
-        {tabs.map((tab) => (
-          <Tab key={tab.value} value={tab.value} label={tab.label} />
-        ))}
-      </Tabs>
-      <Divider />
-      <Box p={2} minHeight={56} display="flex" alignItems="center">
-        <TextField
-          className={classes.queryField}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SvgIcon fontSize="small" color="action">
-                  <SearchIcon />
-                </SvgIcon>
-              </InputAdornment>
-            ),
-          }}
-          onChange={handleQueryChange}
-          placeholder="Search candidates"
-          value={query}
-          variant="outlined"
-        />
-        <Box flexGrow={1} />
-        <TextField
-          label="Sort By"
-          name="sort"
-          onChange={handleSortChange}
-          select
-          SelectProps={{ native: true }}
-          value={sort}
-          variant="outlined"
+    <React.Fragment>
+      <AppBar position="sticky" color="inherit">
+        <Tabs
+          onChange={handleTabsChange}
+          scrollButtons="auto"
+          textColor="secondary"
+          indicatorColor="primary"
+          value={currentTab}
+          variant="scrollable"
         >
-          {sortOptions.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
+          {tabs.map((tab) => (
+            <Tab key={tab.value} value={tab.value} label={tab.label} />
           ))}
-        </TextField>
-      </Box>
-      <PerfectScrollbar>
-        <Box minWidth={700}>
+        </Tabs>
+      </AppBar>
+      <Card className={clsx(classes.root, className)} {...rest}>
+        <Divider />
+        <Box p={2} minHeight={56} display="flex" alignItems="center">
+          <TextField
+            className={classes.queryField}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SvgIcon fontSize="small" color="action">
+                    <SearchIcon />
+                  </SvgIcon>
+                </InputAdornment>
+              ),
+            }}
+            onChange={handleQueryChange}
+            placeholder="Search candidates"
+            value={query}
+            variant="outlined"
+          />
+          <Box flexGrow={1} />
+          <TextField
+            label="Sort By"
+            name="sort"
+            onChange={handleSortChange}
+            select
+            SelectProps={{ native: true }}
+            value={sort}
+            variant="outlined"
+          >
+            {sortOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </TextField>
+        </Box>
+        <Box overflow="auto">
           <Table>
             <TableHead>
               <TableRow>
                 <TableCell>Name</TableCell>
-                <TableCell>Handle</TableCell>
+                <TableCell>Codeforces Handle</TableCell>
                 <TableCell>Class</TableCell>
                 <TableCell>Total Score</TableCell>
-                <TableCell align="right">Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -289,47 +273,48 @@ function Results({ className, customers, ...rest }) {
                           {getInitials(customer.full_name)}
                         </Avatar>
                         <div>
-                          <Typography variant="h6" color="inherit">
-                            {customer.full_name}
-                          </Typography>
+                          {customer.full_name}
                           <Typography variant="body2" color="textSecondary">
                             {customer.email}
                           </Typography>
                         </div>
                       </Box>
                     </TableCell>
-                    <TableCell>{customer.handle}</TableCell>
-                    <TableCell>{customer.class_type}</TableCell>
-                    <TableCell>{customer.overall_score}</TableCell>
-                    <TableCell align="right">
-                      <IconButton
-                        component={Link}
+                    <TableCell>
+                      <Link
+                        color="inherit"
                         href={`https://codeforces.com/profile/${customer.handle}`}
                         target="_blank"
                         rel="noopener"
                       >
-                        <SvgIcon fontSize="small">
-                          <ArrowRightIcon />
-                        </SvgIcon>
-                      </IconButton>
+                        {customer.handle}
+                      </Link>
                     </TableCell>
+                    <TableCell>{customer.class_type}</TableCell>
+                    <TableCell>{customer.overall_score}</TableCell>
                   </TableRow>
                 );
               })}
             </TableBody>
           </Table>
         </Box>
-      </PerfectScrollbar>
-      <TablePagination
-        component="div"
-        count={filteredCustomers.length}
-        onChangePage={handlePageChange}
-        onChangeRowsPerPage={handleLimitChange}
-        page={page}
-        rowsPerPage={limit}
-        rowsPerPageOptions={[5, 10, 25]}
-      />
-    </Card>
+      </Card>
+      <AppBar
+        position="sticky"
+        color="inherit"
+        className={classes.tablePagination}
+      >
+        <TablePagination
+          component="div"
+          count={filteredCustomers.length}
+          onChangePage={handlePageChange}
+          onChangeRowsPerPage={handleLimitChange}
+          page={page}
+          rowsPerPage={limit}
+          rowsPerPageOptions={[5, 10, 25, 50, 100]}
+        />
+      </AppBar>
+    </React.Fragment>
   );
 }
 

@@ -27,9 +27,6 @@ const useStyles = makeStyles((theme) => ({
     ...theme.name === THEMES.ONE_DARK ? {
       backgroundColor: theme.palette.background.default
     } : {}
-  },
-  toolbar: {
-    minHeight: 64
   }
 }));
 
