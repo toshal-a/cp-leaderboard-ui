@@ -2,15 +2,13 @@ import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import {
-  AppBar,
-  Box,
-  Hidden,
-  IconButton,
-  Toolbar,
-  makeStyles,
-  SvgIcon
-} from '@material-ui/core';
+import AppBar from '@material-ui/core/AppBar';
+import Box from '@material-ui/core/Box';
+import Hidden from '@material-ui/core/Hidden';
+import IconButton from '@material-ui/core/IconButton';
+import Toolbar from '@material-ui/core/Toolbar';
+import SvgIcon from '@material-ui/core/SvgIcon';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 import { Menu as MenuIcon } from 'react-feather';
 import Logo from 'components/Logo';
 import { THEMES } from 'constant';

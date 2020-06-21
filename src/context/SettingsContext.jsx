@@ -1,14 +1,10 @@
-import React, {
-    createContext,
-    useState,
-    useEffect
-  } from 'react';
+import React from 'react';
   import PropTypes from 'prop-types';
   import _ from 'lodash';
   import { THEMES } from 'constant/index';
   import { storeSettings } from 'utils/settings';
   
-  const SettingsContext = createContext();
+  const SettingsContext = React.createContext();
   
   const defaultSettings = {
     direction: 'ltr',
@@ -17,7 +13,7 @@ import React, {
   };
   
   export function SettingsProvider({ settings, children }) {
-    const [currentSettings, setCurrentSettings] = useState(settings || defaultSettings);
+    const [currentSettings, setCurrentSettings] = React.useState(settings || defaultSettings);
   
     const handleSaveSettings = (updatedSettings = {}) => {
       const mergedSettings = _.merge({}, currentSettings, updatedSettings);
@@ -26,7 +22,7 @@ import React, {
       storeSettings(mergedSettings);
     };
   
-    useEffect(() => {
+    React.useEffect(() => {
       document.dir = currentSettings.direction;
     }, [currentSettings]);
   

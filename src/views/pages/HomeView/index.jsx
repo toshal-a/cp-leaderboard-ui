@@ -1,22 +1,19 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core';
-import Page from 'components/Page.jsx';
-import Hero from './Hero.jsx';
-import Testimonials from './Quotes.jsx';
+import React from "react";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import Page from "components/Page.jsx";
+import Hero from "./Hero.jsx";
+import Testimonials from "./Quotes.jsx";
 
 const useStyles = makeStyles(() => ({
-  root: {}
+  root: {},
 }));
 
 function HomeView() {
   const classes = useStyles();
 
   return (
-    <Page
-      className={classes.root}
-      title="Home"
-    >
-      <Hero />  
+    <Page className={classes.root} title="Home">
+      <Hero />
       <Testimonials />
     </Page>
   );

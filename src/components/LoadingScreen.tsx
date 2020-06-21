@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import NProgress from 'nprogress';
-import { Box, LinearProgress, makeStyles } from '@material-ui/core';
+import makeStyles from '@material-ui/core/styles/makeStyles';
+import Box from '@material-ui/core/Box';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 function LoadingScreen() {
   const classes = useStyles();
 
-  useEffect(() => {
+  React.useEffect(() => {
     NProgress.start();
 
     return () => {

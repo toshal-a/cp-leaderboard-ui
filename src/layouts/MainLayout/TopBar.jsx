@@ -2,15 +2,13 @@ import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import {
-  AppBar,
-  Box,
-  Toolbar,
-  Hidden,
-  Typography,
-  Link,
-  makeStyles
-} from '@material-ui/core';
+import AppBar from '@material-ui/core/AppBar';
+import Box from '@material-ui/core/Box';
+import Hidden from '@material-ui/core/Hidden';
+import Link from '@material-ui/core/Link';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 import { APP_VERSION } from 'config';
 import Logo from 'components/Logo';
 

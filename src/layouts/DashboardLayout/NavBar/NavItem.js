@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
@@ -73,7 +73,7 @@ function NavItem({
   ...rest
 }) {
   const classes = useStyles();
-  const [open, setOpen] = useState(openProp);
+  const [open, setOpen] = React.useState(openProp);
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);

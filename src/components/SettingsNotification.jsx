@@ -1,16 +1,11 @@
-import React, {
-    useState,
-    useEffect
-  } from 'react';
+import React from 'react';
   import Cookies from 'js-cookie';
-  import {
-    Box,
-    Button,
-    Paper,
-    Portal,
-    Typography,
-    makeStyles
-  } from '@material-ui/core';
+  import Box from '@material-ui/core/Box';
+  import Button from '@material-ui/core/Button';
+  import Paper from '@material-ui/core/Paper';
+  import Portal from '@material-ui/core/Portal';
+  import Typography from '@material-ui/core/Typography';
+  import makeStyles from '@material-ui/core/styles/makeStyles';
   import useSettings from 'hooks/useSettings';
   import { THEMES } from 'constant/index';
   
@@ -29,7 +24,7 @@ import React, {
   
   function SettingsNotification() {
     const classes = useStyles();
-    const [isOpen, setOpen] = useState(false);
+    const [isOpen, setOpen] = React.useState(false);
     const { saveSettings } = useSettings();
   
     const handleSwitch = () => {
@@ -43,7 +38,7 @@ import React, {
       setOpen(false);
     };
   
-    useEffect(() => {
+    React.useEffect(() => {
       const settingsUpdated = Cookies.get('settingsUpdated');
   
       if (!settingsUpdated) {

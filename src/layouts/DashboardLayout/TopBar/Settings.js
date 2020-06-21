@@ -1,17 +1,15 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import { capitalCase } from "change-case";
-import {
-  Badge,
-  Box,
-  Button,
-  IconButton,
-  Popover,
-  SvgIcon,
-  TextField,
-  Tooltip,
-  Typography,
-  makeStyles,
-} from "@material-ui/core";
+import Badge from "@material-ui/core/Badge";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import Popover from "@material-ui/core/Popover";
+import SvgIcon from "@material-ui/core/SvgIcon";
+import TextField from "@material-ui/core/TextField";
+import Tooltip from "@material-ui/core/Tooltip";
+import Typography from "@material-ui/core/Typography";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 import { Settings as SettingsIcon } from "react-feather";
 import useSettings from "hooks/useSettings";
 import { THEMES } from "constant";
@@ -32,10 +30,10 @@ const useStyles = makeStyles((theme) => ({
 
 function Settings() {
   const classes = useStyles();
-  const ref = useRef(null);
+  const ref = React.useRef(null);
   const { settings, saveSettings } = useSettings();
-  const [isOpen, setOpen] = useState(false);
-  const [values, setValues] = useState({
+  const [isOpen, setOpen] = React.useState(false);
+  const [values, setValues] = React.useState({
     theme: settings.theme,
   });
 

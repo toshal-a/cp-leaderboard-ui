@@ -1,21 +1,16 @@
-import React, {
-  useRef,
-  useState
-} from 'react';
+import React from 'react';
 //import { Link as RouterLink } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
-import {
-  Avatar,
-  Box,
-  ButtonBase,
-  Hidden,
-  Menu,
-  MenuItem,
-  Typography,
-  makeStyles
-} from '@material-ui/core';
+import Avatar from '@material-ui/core/Avatar';
+import Box from '@material-ui/core/Box';
+import ButtonBase from '@material-ui/core/ButtonBase';
+import Hidden from '@material-ui/core/Hidden';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Typography from '@material-ui/core/Typography';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 import { logOut } from 'views/auth/LoginView/loginSlice';
 
 const useStyles = makeStyles((theme) => ({
@@ -32,11 +27,11 @@ const useStyles = makeStyles((theme) => ({
 function Account() {
   const classes = useStyles();
   const history = useHistory();
-  const ref = useRef(null);
+  const ref = React.useRef(null);
   const dispatch = useDispatch();
   const account = useSelector((state) => state.login);
   const { enqueueSnackbar } = useSnackbar();
-  const [isOpen, setOpen] = useState(false);
+  const [isOpen, setOpen] = React.useState(false);
 
   const handleOpen = () => {
     setOpen(true);

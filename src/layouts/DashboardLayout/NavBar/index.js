@@ -1,69 +1,63 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable react/prop-types */
-import React from 'react';
-import { useLocation, matchPath } from 'react-router';
-import { Link as RouterLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import PerfectScrollbar from 'react-perfect-scrollbar';
-import PropTypes from 'prop-types';
-import Avatar from '@material-ui/core/Avatar';
-import Box from '@material-ui/core/Box';
-import Chip from '@material-ui/core/Chip';
-import Divider from '@material-ui/core/Divider';
-import Drawer from '@material-ui/core/Drawer';
-import Hidden from '@material-ui/core/Hidden';
-import Link from '@material-ui/core/Link';
-import List from '@material-ui/core/List';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import Typography from '@material-ui/core/Typography';
-import makeStyles from '@material-ui/core/styles/makeStyles';
+import React from "react";
+import { useLocation, matchPath } from "react-router";
+import { Link as RouterLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import PropTypes from "prop-types";
+import Avatar from "@material-ui/core/Avatar";
+import Box from "@material-ui/core/Box";
+import Chip from "@material-ui/core/Chip";
+import Divider from "@material-ui/core/Divider";
+import Drawer from "@material-ui/core/Drawer";
+import Hidden from "@material-ui/core/Hidden";
+import Link from "@material-ui/core/Link";
+import List from "@material-ui/core/List";
+import ListSubheader from "@material-ui/core/ListSubheader";
+import Typography from "@material-ui/core/Typography";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 import {
   Activity as ActivityIcon,
   Trello as TrelloIcon,
   User as UserIcon,
   Flag as FlagIcon,
-} from 'react-feather';
-import Logo from 'components/Logo';
-import NavItem from './NavItem';
+} from "react-feather";
+import Logo from "components/Logo";
+import NavItem from "./NavItem";
 
 const navConfig = [
   {
-    subheader: 'Applications',
-    items: [      
-      {
-        title: 'Contest',
-        href: '/app/contest',
-        icon: FlagIcon
-      },
-      {
-        title: 'Leaderboard',
-        href: '/app/leaderboard',
-        icon: TrelloIcon
-      },
-      {
-        title: 'Live Contest',
-        href: '/app/livecontest',
-        icon: ActivityIcon,
-        info: () => (
-          <Chip
-            color="secondary"
-            size="small"
-            label="Coming Soon"
-          />
-        )
-      }
-    ]
-  },
-  {
-    subheader: 'Management',
+    subheader: "Applications",
     items: [
       {
-        title: 'Account',
-        href: '/app/account',
-        icon: UserIcon
-      }
-    ]
-  }
+        title: "Contest",
+        href: "/app/contest",
+        icon: FlagIcon,
+      },
+      {
+        title: "Leaderboard",
+        href: "/app/leaderboard",
+        icon: TrelloIcon,
+      },
+      {
+        title: "Live Contest",
+        href: "/app/livecontest",
+        icon: ActivityIcon,
+        info: () => <Chip color="secondary" size="small" label="Coming Soon" />,
+      },
+    ],
+  },
+  {
+    subheader: "Management",
+    items: [
+      {
+        title: "Account",
+        href: "/app/account",
+        icon: UserIcon,
+      },
+    ],
+  },
 ];
 
 function renderNavItems({ items, ...rest }) {
@@ -77,18 +71,13 @@ function renderNavItems({ items, ...rest }) {
   );
 }
 
-function reduceChildRoutes({
-  acc,
-  pathname,
-  item,
-  depth = 0
-}) {
+function reduceChildRoutes({ acc, pathname, item, depth = 0 }) {
   const key = item.title + depth;
 
   if (item.items) {
     const open = matchPath(pathname, {
       path: item.href,
-      exact: false
+      exact: false,
     });
 
     acc.push(
@@ -103,7 +92,7 @@ function reduceChildRoutes({
         {renderNavItems({
           depth: depth + 1,
           pathname,
-          items: item.items
+          items: item.items,
         })}
       </NavItem>
     );
@@ -125,21 +114,21 @@ function reduceChildRoutes({
 
 const useStyles = makeStyles(() => ({
   mobileDrawer: {
-    width: 256
+    width: 256,
   },
   desktopDrawer: {
     width: 256,
     top: 64,
-    height: 'calc(100% - 64px)'
+    height: "calc(100% - 64px)",
   },
   avatar: {
-    cursor: 'pointer',
+    cursor: "pointer",
     width: 64,
-    height: 64
-  }
+    height: 64,
+  },
 }));
 
-function NavBar({ openMobile, onMobileClose, }) {
+function NavBar({ openMobile, onMobileClose }) {
   const classes = useStyles();
   const location = useLocation();
   const { user } = useSelector((state) => state.login);
@@ -152,40 +141,22 @@ function NavBar({ openMobile, onMobileClose, }) {
   }, [location.pathname]);
 
   const content = (
-    <Box
-      height="100%"
-      display="flex"
-      flexDirection="column"
-    >
+    <Box height="100%" display="flex" flexDirection="column">
       <PerfectScrollbar options={{ suppressScrollX: true }}>
         <Hidden lgUp>
-          <Box
-            p={2}
-            display="flex"
-            justifyContent="center"
-          >
+          <Box p={2} display="flex" justifyContent="center">
             <RouterLink to="/">
               <Logo />
             </RouterLink>
           </Box>
         </Hidden>
         <Box p={2}>
-          <Box
-            display="flex"
-            justifyContent="center"
-          >
+          <Box display="flex" justifyContent="center">
             <RouterLink to="/app/account">
-              <Avatar
-                alt="User"
-                className={classes.avatar}
-                src={user.avatar}
-              />
+              <Avatar alt="User" className={classes.avatar} src={user.avatar} />
             </RouterLink>
           </Box>
-          <Box
-            mt={2}
-            textAlign="center"
-          >
+          <Box mt={2} textAlign="center">
             <Link
               component={RouterLink}
               to="/app/account"
@@ -195,10 +166,7 @@ function NavBar({ openMobile, onMobileClose, }) {
             >
               {`${user.firstName} ${user.lastName}`}
             </Link>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-            >
+            <Typography variant="body2" color="textSecondary">
               {user.bio}
             </Typography>
           </Box>
@@ -208,16 +176,16 @@ function NavBar({ openMobile, onMobileClose, }) {
           {navConfig.map((config) => (
             <List
               key={config.subheader}
-              subheader={(
-                <ListSubheader
-                  disableGutters
-                  disableSticky
-                >
+              subheader={
+                <ListSubheader disableGutters disableSticky>
                   {config.subheader}
                 </ListSubheader>
-              )}
+              }
             >
-              {renderNavItems({ items: config.items, pathname: location.pathname })}
+              {renderNavItems({
+                items: config.items,
+                pathname: location.pathname,
+              })}
             </List>
           ))}
         </Box>
@@ -254,7 +222,7 @@ function NavBar({ openMobile, onMobileClose, }) {
 
 NavBar.propTypes = {
   onMobileClose: PropTypes.func,
-  openMobile: PropTypes.bool
+  openMobile: PropTypes.bool,
 };
 
 export default NavBar;

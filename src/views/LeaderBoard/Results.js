@@ -1,26 +1,26 @@
 /* eslint-disable max-len */
-import React, { useState } from "react";
+import React from "react";
 import clsx from "clsx";
 import PropTypes from "prop-types";
-import Avatar from '@material-ui/core/Avatar';
-import AppBar from '@material-ui/core/AppBar';
-import Box from '@material-ui/core/Box';
-import Card from '@material-ui/core/Card';
-import Divider from '@material-ui/core/Divider';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import Link from '@material-ui/core/Link';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import Tab from '@material-ui/core/Tab';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import Tabs from '@material-ui/core/Tabs';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import makeStyles from '@material-ui/core/styles/makeStyles';
+import Avatar from "@material-ui/core/Avatar";
+import AppBar from "@material-ui/core/AppBar";
+import Box from "@material-ui/core/Box";
+import Card from "@material-ui/core/Card";
+import Divider from "@material-ui/core/Divider";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import Link from "@material-ui/core/Link";
+import SvgIcon from "@material-ui/core/SvgIcon";
+import Tab from "@material-ui/core/Tab";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TablePagination from "@material-ui/core/TablePagination";
+import TableRow from "@material-ui/core/TableRow";
+import Tabs from "@material-ui/core/Tabs";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 import { Search as SearchIcon } from "react-feather";
 import getInitials from "utils/getInitials";
 
@@ -144,16 +144,20 @@ const useStyles = makeStyles((theme) => ({
   tablePagination: {
     bottom: 0,
   },
+  sortField: {
+    marginLeft: theme.spacing(2),
+    flexBasis: 200,
+  },
 }));
 
 function Results({ className, customers, ...rest }) {
   const classes = useStyles();
-  const [currentTab, setCurrentTab] = useState("all");
-  const [page, setPage] = useState(0);
-  const [limit, setLimit] = useState(10);
-  const [query, setQuery] = useState("");
-  const [sort, setSort] = useState(sortOptions[0].value);
-  const [filters, setFilters] = useState({
+  const [currentTab, setCurrentTab] = React.useState("all");
+  const [page, setPage] = React.useState(0);
+  const [limit, setLimit] = React.useState(10);
+  const [query, setQuery] = React.useState("");
+  const [sort, setSort] = React.useState(sortOptions[0].value);
+  const [filters, setFilters] = React.useState({
     FE: null,
     SE: null,
     TE: null,
@@ -203,7 +207,7 @@ function Results({ className, customers, ...rest }) {
 
   return (
     <React.Fragment>
-      <AppBar position="sticky" color="inherit">
+      <AppBar position="static" color="transparent">
         <Tabs
           onChange={handleTabsChange}
           scrollButtons="auto"
@@ -217,9 +221,8 @@ function Results({ className, customers, ...rest }) {
           ))}
         </Tabs>
       </AppBar>
-      <Card className={clsx(classes.root, className)} {...rest}>
-        <Divider />
-        <Box p={2} minHeight={56} display="flex" alignItems="center">
+      <AppBar position="sticky" color="inherit">
+        <Box p={1} display="flex" alignItems="center">
           <TextField
             className={classes.queryField}
             InputProps={{
@@ -238,6 +241,7 @@ function Results({ className, customers, ...rest }) {
           />
           <Box flexGrow={1} />
           <TextField
+            className={classes.sortField}
             label="Sort By"
             name="sort"
             onChange={handleSortChange}
@@ -253,6 +257,9 @@ function Results({ className, customers, ...rest }) {
             ))}
           </TextField>
         </Box>
+      </AppBar>
+      <Card className={clsx(classes.root, className)} {...rest}>
+        <Divider />
         <Box overflow="auto">
           <Table>
             <TableHead>

@@ -5,7 +5,7 @@ import "nprogress/nprogress.css";
 import 'mock';
 import React from "react";
 import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
+import Provider from "react-redux/es/components/Provider";
 import * as serviceWorker from "./serviceWorker";
 import { SettingsProvider } from "context/SettingsContext";
 import store from "store";

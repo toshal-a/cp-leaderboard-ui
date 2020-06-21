@@ -9,7 +9,7 @@ import {
   makeStyles,
   StylesProvider,
   ThemeProvider,
-} from "@material-ui/core";
+} from "@material-ui/core/styles";
 import Auth from "components/Auth";
 import SettingsNotification from "components/SettingsNotification";
 import ScrollReset from "components/ScrollReset";

@@ -1,11 +1,11 @@
 /* eslint-disable react/no-array-index-key */
-import React, { lazy, Suspense, Fragment } from "react";
-import { Switch, Redirect, Route } from "react-router-dom";
-import DashboardLayout from 'layouts/DashboardLayout/index.jsx';
+import React from "react";
+import {Switch, Redirect, Route} from "react-router-dom";
+import DashboardLayout from "layouts/DashboardLayout/index.jsx";
 import MainLayout from "layouts/MainLayout/index.jsx";
 import HomeView from "views/pages/HomeView/index.jsx";
 import LoadingScreen from "components/LoadingScreen";
-import AuthGuard from 'components/AuthGuard';
+import AuthGuard from "components/AuthGuard";
 
 const routesConfig = [
   {
@@ -16,55 +16,61 @@ const routesConfig = [
   {
     exact: true,
     path: "/404",
-    component: lazy(() => import("views/pages/Error404View.jsx")),
+    component: React.lazy(() => import("views/pages/Error404View.jsx")),
   },
   {
     exact: true,
-    path: '/login',
-    component: lazy(() => import('views/auth/LoginView'))
+    path: "/login",
+    component: React.lazy(() => import("views/auth/LoginView")),
   },
   /*{
     exact: true,
     path: '/register',
-    component: lazy(() => import('views/auth/RegisterView'))
+    component: React.lazy(() => import('views/auth/RegisterView'))
   },*/
   {
-    path: '/app',
+    path: "/app",
     guard: AuthGuard,
     layout: DashboardLayout,
     routes: [
       {
         exact: true,
-        path: '/app',
-        component: () => <Redirect to="/app/errors/404" />
+        path: "/app",
+        component: () => <Redirect to="/app/welcome" />,
       },
       {
         exact: true,
-        path: '/app/account',
-        component: lazy(() => import('views/pages/AccountView'))
+        path: "/app/account",
+        component: React.lazy(() => import("views/pages/AccountView")),
       },
-     /* {
-        exact: true,
-        path: '/app/contest',
-        component: lazy(() => import('views/Contest'))
-      },*/
       {
         exact: true,
-        path: '/app/leaderboard',
-        component: lazy(() => import('views/LeaderBoard'))
+        path: ['/app/contest','/app/contest/:contestId'],
+        component: React.lazy(() => import('views/Contest'))
+      },
+      {
+        exact: true,
+        path: "/app/leaderboard",
+        component: React.lazy(() => import("views/LeaderBoard")),
       },
       {
         exact: true,
         path: "/app/livecontest",
-        component: lazy(() => import("views/pages/UnderConstruction.jsx")),
+        component: React.lazy(() =>
+          import("views/pages/UnderConstruction.jsx")
+        ),
       },
       {
         exact: true,
         path: "/app/errors/404",
-        component: lazy(() => import("views/pages/Error404View.jsx")),
+        component: React.lazy(() => import("views/pages/Error404View.jsx")),
+      },
+      {
+        exact: true,
+        path: "/app/welcome",
+        component: React.lazy(() => import("views/pages/WelcomeView.jsx")),
       }
-
-    ]
+    ],
   },
   {
     path: "*",
@@ -84,11 +90,11 @@ const routesConfig = [
 
 const renderRoutes = (routes) =>
   routes ? (
-    <Suspense fallback={<LoadingScreen />}>
+    <React.Suspense fallback={<LoadingScreen />}>
       <Switch>
         {routes.map((route, i) => {
-          const Guard = route.guard || Fragment;
-          const Layout = route.layout || Fragment;
+          const Guard = route.guard || React.Fragment;
+          const Layout = route.layout || React.Fragment;
           const Component = route.component;
 
           return (
@@ -111,7 +117,7 @@ const renderRoutes = (routes) =>
           );
         })}
       </Switch>
-    </Suspense>
+    </React.Suspense>
   ) : null;
 
 function Routes() {

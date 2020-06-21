@@ -1,9 +1,7 @@
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import useTheme from "@material-ui/core/styles/useTheme";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import makeStyles from "@material-ui/core/styles/makeStyles";
@@ -27,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Error404View() {
+function WelcomeView() {
   const classes = useStyles();
   const theme = useTheme();
   const mobileDevice = useMediaQuery(theme.breakpoints.down("sm"));
@@ -40,29 +38,19 @@ function Error404View() {
           variant={mobileDevice ? "h4" : "h1"}
           color="textPrimary"
         >
-          The page is under construction. See Ya later!!
+          Welcome !!
         </Typography>
 
         <Box mt={6} display="flex" justifyContent="center">
           <img
             alt="Under development"
             className={classes.image}
-            src="/static/images/undraw_under_construction_46pa.svg"
+            src="/static/images/undraw_developer_activity_bv83.svg"
           />
-        </Box>
-        <Box mt={6} display="flex" justifyContent="center">
-          <Button
-            color="secondary"
-            component={RouterLink}
-            to="/"
-            variant="outlined"
-          >
-            Back to home
-          </Button>
         </Box>
       </Container>
     </Page>
   );
 }
 
-export default Error404View;
+export default WelcomeView;

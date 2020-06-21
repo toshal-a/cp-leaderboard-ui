@@ -21,6 +21,7 @@
     "axios-mock-adapter": "^1.18.1",
     "change-case": "^4.1.1",
     "clsx": "^1.1.1",
+    "color-hash": "^1.0.3",
     "formik": "^2.1.4",
     "history": "^4.10.1",
     "js-cookie": "^2.2.1",
@@ -49,7 +50,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "cross-env GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -67,5 +68,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2"
   }
 }
