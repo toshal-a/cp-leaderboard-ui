@@ -187,8 +187,8 @@ function RegisterForm({ className, onSubmitSuccess, ...rest }) {
               >
                 <option value="FE">FE</option>
                 <option value="SE">SE</option>
-                <option value="TE">BE</option>
-                <option value="BE">TE</option>
+                <option value="TE">TE</option>
+                <option value="BE">BE</option>
                 <option value="Other">Other</option>
               </TextField>
             </Grid>
