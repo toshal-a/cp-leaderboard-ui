@@ -142,6 +142,7 @@ function StandingList({ className, contestants, problems, ...rest }) {
             variant="outlined"
           />
           <Box flexGrow={1} />
+          <Typography variant="body2" color="textPrimary">
           <FormControlLabel
             className={classes.showUnofficalField}
             control={(
@@ -153,6 +154,7 @@ function StandingList({ className, contestants, problems, ...rest }) {
             )}
             label="Show Unoffical"
           />
+          </Typography>
         </Box>
       </AppBar>
       <Card className={clsx(classes.root, className)} {...rest}>

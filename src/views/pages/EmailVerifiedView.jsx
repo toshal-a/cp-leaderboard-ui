@@ -58,7 +58,7 @@ function EmailVerifiedView() {
           variant={mobileDevice ? "h4" : "h1"}
           color="textPrimary"
         >
-          Email Verified !!
+          {detail}
         </Typography>
 
         <Box mt={6} display="flex" justifyContent="center">

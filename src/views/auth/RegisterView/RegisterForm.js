@@ -67,7 +67,7 @@ function RegisterForm({ className, onSubmitSuccess, ...rest }) {
           setStatus({ success: true });
           setSubmitting(false);
           enqueueSnackbar(
-            "Registered. Verify user & Check spam folder if not in inbox.",
+            "Registered. Please check your email (Spam folder as well).",
             {
               variant: "success",
             }

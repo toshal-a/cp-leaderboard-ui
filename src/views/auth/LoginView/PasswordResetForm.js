@@ -1,24 +1,24 @@
-import React from 'react';
-import clsx from 'clsx';
-import { useSnackbar } from 'notistack';
-import axios from 'utils/axios';
-import * as Yup from 'yup';
-import { Formik } from 'formik';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import green from '@material-ui/core/colors/green';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import makeStyles from '@material-ui/core/styles/makeStyles';
+import React from "react";
+import clsx from "clsx";
+import { useSnackbar } from "notistack";
+import axios from "utils/axios";
+import * as Yup from "yup";
+import { Formik } from "formik";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import green from "@material-ui/core/colors/green";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const useStyles = makeStyles(() => ({
   buttonProgress: {
     color: green[500],
-    position: 'relative',
-    left: '50%',
+    position: "relative",
+    left: "50%",
     marginTop: -32,
-    marginLeft: -12
+    marginLeft: -12,
   },
 }));
 
@@ -29,28 +29,36 @@ function PasswordResetForm({ className, ...rest }) {
   return (
     <Formik
       initialValues={{
-        email: ''
+        email: "",
       }}
       validationSchema={Yup.object().shape({
-        email: Yup.string().email('Must be a valid email').max(255).required('Email is required')
+        email: Yup.string()
+          .email("Must be a valid email")
+          .max(255)
+          .required("Email is required"),
       })}
-      onSubmit={async (values, {
-        setErrors,
-        setStatus,
-        setSubmitting,
-        resetForm
-      }) => {
+      onSubmit={async (
+        values,
+        { setErrors, setStatus, setSubmitting, resetForm }
+      ) => {
         try {
-          await axios.post('https://api.cp-leaderboard.me/login/reset_password',{email : values.email});
+          await axios.post(
+            "https://api.cp-leaderboard.me/login/reset_password",
+            { email: values.email }
+          );
           resetForm();
           setStatus({ success: true });
           setSubmitting(false);
-          enqueueSnackbar('Email Sent. Check Spam folder if not in inbox.', {
-            variant: 'success'
-          });
-          
+          enqueueSnackbar(
+            "Sent. Please check your email (Spam folder as well).",
+            {
+              variant: "success",
+            }
+          );
         } catch (error) {
-          const message = (error.response && error.response.data.detail) || 'Something went wrong';
+          const message =
+            (error.response && error.response.data.detail) ||
+            "Something went wrong";
 
           setStatus({ success: false });
           setErrors({ submit: message });
@@ -65,7 +73,7 @@ function PasswordResetForm({ className, ...rest }) {
         handleSubmit,
         isSubmitting,
         touched,
-        values
+        values,
       }) => (
         <form
           noValidate
@@ -98,16 +106,15 @@ function PasswordResetForm({ className, ...rest }) {
             >
               Send Reset Email
             </Button>
-            {isSubmitting && <CircularProgress size={32} className={classes.buttonProgress} />}
+            {isSubmitting && (
+              <CircularProgress size={32} className={classes.buttonProgress} />
+            )}
             {errors.submit && (
               <Box mt={3}>
-                <FormHelperText error>
-                  {errors.submit}
-                </FormHelperText>
+                <FormHelperText error>{errors.submit}</FormHelperText>
               </Box>
             )}
           </Box>
-          
         </form>
       )}
     </Formik>
