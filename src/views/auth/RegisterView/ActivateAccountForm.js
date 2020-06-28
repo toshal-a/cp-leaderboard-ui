@@ -96,7 +96,7 @@ function ActivateAccountForm({ className, ...rest }) {
               type="submit"
               variant="contained"
             >
-              Send Reset Email
+              Send Activate email
             </Button>
             {isSubmitting && <CircularProgress size={32} className={classes.buttonProgress} />}
             {errors.submit && (
