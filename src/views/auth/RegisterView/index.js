@@ -16,6 +16,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Page from "components/Page";
 import RegisterForm from "./RegisterForm";
+import ActivateAccountForm from './ActivateAccountForm';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,9 +42,15 @@ const useStyles = makeStyles((theme) => ({
 function RegisterView() {
   const classes = useStyles();
   const history = useHistory();
+  const [showActivateAccount, setShowActivateAccount] = React.useState(false);
 
   const handleSubmitSuccess = () => {
     history.push("/login");
+  };
+
+
+  const handleShowActivateAccount = () => {
+    setShowActivateAccount((oldShowActivateAccount) => !oldShowActivateAccount);
   };
 
   return (
@@ -75,12 +82,19 @@ function RegisterView() {
             <Box mt={3}>
               <RegisterForm onSubmitSuccess={handleSubmitSuccess} />
             </Box>
-        
+            <Box>
+              { showActivateAccount && <ActivateAccountForm />}
+            </Box>
             <Box my={2}>
               <Divider />
             </Box>
 
-            <Grid container justify="flex-end">
+            <Grid container>
+            <Grid item xs>
+                <Link  onClick={handleShowActivateAccount} variant="body2">
+                  Activate your account
+                </Link>
+              </Grid>
               <Grid item>
                 <Link component={RouterLink} to="/login" variant="body2">
                   {" Already have an account? Sign in"}
