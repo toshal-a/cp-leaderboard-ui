@@ -51,7 +51,7 @@ function EmailVerifiedView() {
   }
 
   return (
-    <Page className={classes.root} title="Email Verified">
+    <Page className={classes.root} title="Email Verification">
       <Container maxWidth="lg">
         <Typography
           align="center"

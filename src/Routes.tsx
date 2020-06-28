@@ -30,6 +30,11 @@ const routesConfig = [
   },
   {
     exact: true,
+    path: "/reset_password/:resetToken",
+    component: React.lazy(() => import("views/pages/PasswordResetView.jsx")),
+  },
+  {
+    exact: true,
     path: "/register",
     component: React.lazy(() => import("views/auth/RegisterView")),
   },
