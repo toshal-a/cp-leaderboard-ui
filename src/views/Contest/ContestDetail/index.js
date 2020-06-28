@@ -19,7 +19,7 @@ import LoadingScreen from "components/LoadingScreen";
 const ContestDetail = (props) => {
   const { contestId , handles } = props;
   const history = useHistory();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(1);
   const [invalue, setInvalue] = React.useState(true);
   let contestDetailRef = React.createRef();
   const isMountedRef = useIsMountedRef();
@@ -27,7 +27,7 @@ const ContestDetail = (props) => {
   const getContestDetail = React.useCallback(() => {
     axios
       .get(
-        `https://codeforces.com/api/contest.standings?contestId=${contestId}&handles=${handles.join(';')}`
+        `https://codeforces.com/api/contest.standings?contestId=${contestId}&showUnofficial=true&handles=${handles.join(';')}`
       )
       .then((response) => {
         if (isMountedRef.current) {

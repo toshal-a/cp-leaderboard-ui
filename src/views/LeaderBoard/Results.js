@@ -180,6 +180,7 @@ function Results({ className, customers, ...rest }) {
     }
     setFilters(updatedFilters);
     setCurrentTab(value);
+    setPage(0);
   };
 
   const handleQueryChange = (event) => {

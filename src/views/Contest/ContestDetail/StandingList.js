@@ -16,16 +16,17 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
-import IconButton from "@material-ui/core/IconButton";
-import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import TextField from "@material-ui/core/TextField";
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Typography from "@material-ui/core/Typography";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import { Search as SearchIcon } from "react-feather";
 import green from "@material-ui/core/colors/green";
 import Chip from "@material-ui/core/Chip";
+import getInitials from "utils/getInitials";
 
-function applyFilters(contestants, query) {
+function applyFilters(contestants, query,showUnoffical) {
   return contestants.filter((contestant) => {
     let matches = true;
 
@@ -48,6 +49,10 @@ function applyFilters(contestants, query) {
       }
     }
 
+    if(contestant.party.participantType !== 'CONTESTANT' && !showUnoffical){
+      matches = false;
+    }
+
     return matches;
   });
 }
@@ -67,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
   },
   tablePagination: {
-    position: "fixec",
+    position: "fixed",
     bottom: 0,
     left: 0,
     right: 0,
@@ -78,6 +83,9 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
   },
+  showUnofficalField: {
+    marginLeft: theme.spacing(2)
+  },
 }));
 
 function StandingList({ className, contestants, problems, ...rest }) {
@@ -85,13 +93,7 @@ function StandingList({ className, contestants, problems, ...rest }) {
   const [page, setPage] = React.useState(0);
   const [limit, setLimit] = React.useState(10);
   const [query, setQuery] = React.useState("");
-
-  React.useEffect(() => {
-    console.log("Mount");
-    return () => {
-      console.log("Unmount");
-    };
-  }, []);
+  const [showUnoffical,setShowUnoffical] = React.useState(false);
 
   const handleQueryChange = (event) => {
     event.persist();
@@ -106,8 +108,13 @@ function StandingList({ className, contestants, problems, ...rest }) {
     setLimit(event.target.value);
   };
 
+  const handleShowUnofficial = (event) => {
+    event.persist();
+    setShowUnoffical((oldShowUnoffical) => !oldShowUnoffical);
+  };
+
   // Usually query is done on backend with indexing solutions
-  const filteredcontestants = applyFilters(contestants, query);
+  const filteredcontestants = applyFilters(contestants, query, showUnoffical);
   const paginatedcontestants = applyPagination(
     filteredcontestants,
     page,
@@ -135,6 +142,17 @@ function StandingList({ className, contestants, problems, ...rest }) {
             variant="outlined"
           />
           <Box flexGrow={1} />
+          <FormControlLabel
+            className={classes.showUnofficalField}
+            control={(
+              <Checkbox
+                checked={showUnoffical}
+                onChange={handleShowUnofficial}
+                name="showUnoffical"
+              />
+            )}
+            label="Show Unoffical"
+          />
         </Box>
       </AppBar>
       <Card className={clsx(classes.root, className)} {...rest}>
@@ -144,7 +162,7 @@ function StandingList({ className, contestants, problems, ...rest }) {
           <Table stickyHeader>
             <TableHead>
               <TableRow>
-                <TableCell />
+                <TableCell>Rank</TableCell>
                 <TableCell>Handle</TableCell>
                 <TableCell>Points</TableCell>
                 <TableCell>Penalty</TableCell>
@@ -155,22 +173,12 @@ function StandingList({ className, contestants, problems, ...rest }) {
               {paginatedcontestants.map((contestant) => {
                 return (
                   <React.Fragment key={contestant.party.members[0].handle}>
-                    <TableRow >
-                      <TableCell>
-                        <IconButton
-                          aria-label="expand row"
-                          size="small"
-                          onClick={(e) => {
-                            e.preventDefault();
-                          }}
-                        >
-                          <KeyboardArrowDownIcon />
-                        </IconButton>
-                      </TableCell>
+                    <TableRow>
+                      <TableCell>{contestant.rank}</TableCell>
                       <TableCell>
                         <Box display="flex" alignItems="center">
                           <Avatar className={classes.avatar}>
-                            {contestant.rank}
+                            {getInitials(contestant.party.members[0].handle)}
                           </Avatar>
                           <div>
                             <Link
