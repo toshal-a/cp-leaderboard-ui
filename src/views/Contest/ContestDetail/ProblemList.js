@@ -25,7 +25,7 @@ function ProblemList({ problems }) {
       <Grid container spacing={1}>
         {problems.map((problem) => {
           return (
-            <Grid key={problem.name} item lg={4} xl={3} md={4} sm={6} xs={12}>
+            <Grid key={problem.name+problem.index} item lg={4} xl={3} md={4} sm={6} xs={12}>
               <Card variant="outlined">
                 <Box p={2}>
                   <Box display="flex" alignItems="center">

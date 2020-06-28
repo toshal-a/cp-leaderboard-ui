@@ -34,14 +34,13 @@ class AuthService {
   }
 
   loginWithEmailAndPassword = (email, password) => new Promise((resolve, reject) => {
-    axios.post('/api/account/login', { email, password })
+    const formData = new FormData();
+    formData.append('username',email);
+    formData.append('password',password);
+    axios.post('https://api.cp-leaderboard.me/login/access-token',formData)
       .then((response) => {
-        if (response.data.user) {
-          this.setSession(response.data.accessToken);
-          resolve(response.data.user);
-        } else {
-          reject(response.data.error);
-        }
+          this.setSession(response.data.access_token);
+          resolve(response.data.access_token);
       })
       .catch((error) => {
         reject(error);
@@ -49,13 +48,9 @@ class AuthService {
   })
 
   loginInWithToken = () => new Promise((resolve, reject) => {
-    axios.get('/api/account/me')
+    axios.get('https://api.cp-leaderboard.me/user/me')
       .then((response) => {
-        if (response.data.user) {
-          resolve(response.data.user);
-        } else {
-          reject(response.data.error);
-        }
+          resolve(response.data);
       })
       .catch((error) => {
         reject(error);

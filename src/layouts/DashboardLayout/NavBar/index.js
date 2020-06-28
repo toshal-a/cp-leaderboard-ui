@@ -17,6 +17,7 @@ import List from "@material-ui/core/List";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import Typography from "@material-ui/core/Typography";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import Gravatar from 'react-gravatar';
 import {
   Activity as ActivityIcon,
   Trello as TrelloIcon,
@@ -31,14 +32,14 @@ const navConfig = [
     subheader: "Applications",
     items: [
       {
-        title: "Contest",
-        href: "/app/contest",
-        icon: FlagIcon,
-      },
-      {
         title: "Leaderboard",
         href: "/app/leaderboard",
         icon: TrelloIcon,
+      },
+      {
+        title: "Contest",
+        href: "/app/contest",
+        icon: FlagIcon,
       },
       {
         title: "Live Contest",
@@ -150,10 +151,12 @@ function NavBar({ openMobile, onMobileClose }) {
             </RouterLink>
           </Box>
         </Hidden>
-        <Box p={2}>
+       { <Box p={2}>
           <Box display="flex" justifyContent="center">
             <RouterLink to="/app/account">
-              <Avatar alt="User" className={classes.avatar} src={user.avatar} />
+              <Avatar alt="User" className={classes.avatar} >
+              <Gravatar email={user.email} />
+              </Avatar>
             </RouterLink>
           </Box>
           <Box mt={2} textAlign="center">
@@ -164,13 +167,13 @@ function NavBar({ openMobile, onMobileClose }) {
               color="textPrimary"
               underline="none"
             >
-              {`${user.firstName} ${user.lastName}`}
+              {`${user.full_name}`}
             </Link>
             <Typography variant="body2" color="textSecondary">
-              {user.bio}
+              {user.handle}
             </Typography>
           </Box>
-        </Box>
+  </Box> }
         <Divider />
         <Box p={2}>
           {navConfig.map((config) => (

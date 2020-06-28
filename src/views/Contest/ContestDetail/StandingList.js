@@ -154,8 +154,8 @@ function StandingList({ className, contestants, problems, ...rest }) {
             <TableBody>
               {paginatedcontestants.map((contestant) => {
                 return (
-                  <React.Fragment>
-                    <TableRow key={contestant.party.members[0].handle}>
+                  <React.Fragment key={contestant.party.members[0].handle}>
+                    <TableRow >
                       <TableCell>
                         <IconButton
                           aria-label="expand row"

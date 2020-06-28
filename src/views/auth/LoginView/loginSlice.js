@@ -44,8 +44,8 @@ export const login = (email, password) => async (dispatch) => {
   try {
     dispatch(loginRequest());
 
-    const user = await authService.loginWithEmailAndPassword(email, password);
-
+    await authService.loginWithEmailAndPassword(email, password);
+    const user = await authService.loginInWithToken();
     dispatch(loginSuccess(user));
   } catch (error) {
     dispatch(loginFailure());

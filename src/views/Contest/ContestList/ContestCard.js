@@ -13,9 +13,7 @@ import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import useTheme from "@material-ui/core/styles/useTheme";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-
+import makeStyles from "@material-ui/core/styles/makeStyles";
 
 function getPhaseLabel(contestType) {
   const map = {
@@ -45,17 +43,25 @@ function getPhaseLabel(contestType) {
   return <Label color={color}>{text}</Label>;
 }
 
+const useStyles = makeStyles((theme) => ({
+  card: {
+    display: "block",
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
+    },
+  },
+}));
+
 function ContestCard({ contest, className, ...rest }) {
   const history = useHistory();
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up("md"));
+  const classes = useStyles();
   const handleContestClick = (e) => {
     e.preventDefault();
     history.push(`/app/contest/${contest.id}`);
   };
   return (
     <Card className={clsx(className)} variant="outlined" {...rest}>
-      <Box display={matches ? "flex" : "block"}>
+      <Box className={classes.card}>
         <Box p={2}>
           <Box display="flex" alignItems="center">
             <Avatar>
@@ -112,7 +118,7 @@ function ContestCard({ contest, className, ...rest }) {
             </Grid>
           </Grid>
         </Box>
-
+       
         <Divider />
         <Box py={2} pl={2} pr={3} display="flex" alignItems="center">
           {getPhaseLabel(contest.phase)}

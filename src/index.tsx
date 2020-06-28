@@ -2,7 +2,6 @@ import "react-app-polyfill/ie11";
 import "react-app-polyfill/stable";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import "nprogress/nprogress.css";
-import 'mock';
 import React from "react";
 import ReactDOM from "react-dom";
 import Provider from "react-redux/es/components/Provider";

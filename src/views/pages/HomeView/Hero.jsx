@@ -10,8 +10,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.dark,
-    paddingTop: 200,
-    paddingBottom: 200,
+    paddingTop: 50,
     [theme.breakpoints.down("md")]: {
       paddingTop: 60,
       paddingBottom: 60,
@@ -58,7 +57,7 @@ function Hero({ className, ...rest }) {
                 Introducing
               </Typography>
               <Typography variant="h1" color="textPrimary">
-                LeaderBored
+                CP-Leaderboard
               </Typography>
               <Box mt={3}>
                 <Typography variant="h3" color="textSecondary">

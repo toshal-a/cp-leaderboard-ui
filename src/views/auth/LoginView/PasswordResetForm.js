@@ -1,9 +1,8 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import clsx from 'clsx';
 import { useSnackbar } from 'notistack';
+import axios from 'utils/axios';
 import * as Yup from 'yup';
-import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import green from '@material-ui/core/colors/green';
@@ -12,7 +11,6 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import { login } from './loginSlice';
 
 const useStyles = makeStyles(() => ({
   buttonProgress: {
@@ -24,20 +22,17 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function LoginForm({ className, onSubmitSuccess, ...rest }) {
+function PasswordResetForm({ className, ...rest }) {
   const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
-  const dispatch = useDispatch();
 
   return (
     <Formik
       initialValues={{
-        email: '',
-        password: ''
+        email: ''
       }}
       validationSchema={Yup.object().shape({
-        email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
-        password: Yup.string().max(255).required('Password is required')
+        email: Yup.string().email('Must be a valid email').max(255).required('Email is required')
       })}
       onSubmit={async (values, {
         setErrors,
@@ -46,14 +41,13 @@ function LoginForm({ className, onSubmitSuccess, ...rest }) {
         resetForm
       }) => {
         try {
-          await dispatch(login(values.email, values.password));
+          await axios.post('https://api.cp-leaderboard.me/login/reset_password',{email : values.email});
           resetForm();
           setStatus({ success: true });
           setSubmitting(false);
-          enqueueSnackbar('Successfully logged in', {
+          enqueueSnackbar('Email Sent. Check Spam folder if not in inbox.', {
             variant: 'success'
           });
-          onSubmitSuccess();
           
         } catch (error) {
           const message = (error.response && error.response.data.detail) || 'Something went wrong';
@@ -93,19 +87,6 @@ function LoginForm({ className, onSubmitSuccess, ...rest }) {
             value={values.email}
             variant="outlined"
           />
-          <TextField
-            error={Boolean(touched.password && errors.password)}
-            fullWidth
-            helperText={touched.password && errors.password}
-            label="Password"
-            margin="normal"
-            name="password"
-            onBlur={handleBlur}
-            onChange={handleChange}
-            type="password"
-            value={values.password}
-            variant="outlined"
-          />
           <Box mt={2}>
             <Button
               color="secondary"
@@ -115,7 +96,7 @@ function LoginForm({ className, onSubmitSuccess, ...rest }) {
               type="submit"
               variant="contained"
             >
-              Log In
+              Send Reset Email
             </Button>
             {isSubmitting && <CircularProgress size={32} className={classes.buttonProgress} />}
             {errors.submit && (
@@ -133,13 +114,4 @@ function LoginForm({ className, onSubmitSuccess, ...rest }) {
   );
 }
 
-LoginForm.propTypes = {
-  className: PropTypes.string,
-  onSubmitSuccess: PropTypes.func
-};
-
-LoginForm.defaultProps = {
-  onSubmitSuccess: () => {}
-};
-
-export default LoginForm;
+export default PasswordResetForm;

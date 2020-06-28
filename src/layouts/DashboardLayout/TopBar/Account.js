@@ -11,6 +11,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
 import makeStyles from '@material-ui/core/styles/makeStyles';
+import Gravatar from 'react-gravatar';
 import { logOut } from 'views/auth/LoginView/loginSlice';
 
 const useStyles = makeStyles((theme) => ({
@@ -65,14 +66,16 @@ function Account() {
         <Avatar
           alt="User"
           className={classes.avatar}
-          src={account.user.avatar}
-        />
+         
+        >
+          <Gravatar email={account.user.email} />
+          </Avatar>
         <Hidden smDown>
           <Typography
             variant="h6"
             color="inherit"
           >
-            {`${account.user.firstName} ${account.user.lastName}`}
+            {`${account.user.full_name}`}
           </Typography>
         </Hidden>
       </Box>

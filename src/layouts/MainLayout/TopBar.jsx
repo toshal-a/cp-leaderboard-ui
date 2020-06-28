@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Box from '@material-ui/core/Box';
 import Hidden from '@material-ui/core/Hidden';
-import Link from '@material-ui/core/Link';
+import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import makeStyles from '@material-ui/core/styles/makeStyles';
@@ -60,16 +60,15 @@ function TopBar({ className, ...rest }) {
           </Typography>
         </Hidden>
         <Box flexGrow={1} />
-        <Link
+        <Button
           className={classes.link}
-          color="textSecondary"
+          color="primary"
           component={RouterLink}
           to="/app"
-          underline="none"
-          variant="body2"
+          variant="contained"
         >
           Dashboard
-        </Link>
+        </Button>
       </Toolbar>
     </AppBar>
   );

@@ -1,22 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from "utils/axios";
 import clsx from 'clsx';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { useSnackbar } from 'notistack';
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  Divider,
-  FormHelperText,
-  Grid,
-  TextField,
-  makeStyles
-} from '@material-ui/core';
-import wait from 'utils/wait';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
+import Divider from '@material-ui/core/Divider';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 
 const useStyles = makeStyles(() => ({
   root: {}
@@ -49,7 +47,7 @@ function Security({ className, ...rest }) {
       }) => {
         try {
           // Make API request
-          await wait(500);
+          await axios.put('https://api.cp-leaderboard.me/user/me',{password : values.password});
           resetForm();
           setStatus({ success: true });
           setSubmitting(false);
@@ -57,8 +55,10 @@ function Security({ className, ...rest }) {
             variant: 'success'
           });
         } catch (error) {
+          const message = (error.response && error.response.data.detail) || 'Something went wrong';
+
           setStatus({ success: false });
-          setErrors({ submit: error.message });
+          setErrors({ submit: message });
           setSubmitting(false);
         }
       }}

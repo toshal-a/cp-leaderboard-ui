@@ -2,6 +2,7 @@ import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import axios from "utils/axios";
 import Page from "components/Page";
+import LoadingScreen from "components/LoadingScreen";
 import useIsMountedRef from "hooks/useIsMountedRef";
 import Results from "./Results";
 
@@ -18,10 +19,8 @@ function CustomerListView() {
   const [customers, setCustomers] = React.useState(null);
 
   const getCustomers = React.useCallback(() => {
-    axios.get("/user/").then((response) => {
-      console.log(isMountedRef.current);
+    axios.get("https://api.cp-leaderboard.me/user/").then((response) => {
       if (isMountedRef.current) {
-        console.log("Inside get customer");
         setCustomers(response.data);
       }
     });
@@ -32,7 +31,7 @@ function CustomerListView() {
   }, [getCustomers]);
 
   if (!customers) {
-    return null;
+    return <LoadingScreen />;
   }
 
   return (

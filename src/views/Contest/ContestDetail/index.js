@@ -17,7 +17,7 @@ import StandingList from "./StandingList";
 import LoadingScreen from "components/LoadingScreen";
 
 const ContestDetail = (props) => {
-  const { contestId } = props;
+  const { contestId , handles } = props;
   const history = useHistory();
   const [value, setValue] = React.useState(0);
   const [invalue, setInvalue] = React.useState(true);
@@ -27,14 +27,14 @@ const ContestDetail = (props) => {
   const getContestDetail = React.useCallback(() => {
     axios
       .get(
-        `https://codeforces.com/api/contest.standings?contestId=${contestId}&from=1&count=25`
+        `https://codeforces.com/api/contest.standings?contestId=${contestId}&handles=${handles.join(';')}`
       )
       .then((response) => {
         if (isMountedRef.current) {
           setContestdetail(response.data.result);
         }
       });
-  }, [isMountedRef, contestId]);
+  }, [isMountedRef, contestId,handles]);
 
   React.useEffect(() => {
     getContestDetail();

@@ -8,20 +8,11 @@ const JWT_EXPIRES_IN = '2 days';
 const db = {
   user: {
     id: '5e86809283e28b96d2d38537',
-    avatar: '/static/images/avatars/avatar_6.png',
-    bio: 'Sales Manager',
-    canHire: false,
-    country: 'USA',
-    email: 'katarina.smith@devias.io',
-    username: 'admin',
-    password: 'admin',
-    firstName: 'Katarina',
-    isPublic: true,
-    lastName: 'Smith',
-    phone: '+40 777666555',
-    role: 'admin',
-    state: 'New York',
-    timezone: '4:32PM (GMT-4)'
+    email: 'jainyakshittwo@gmail.com',
+    full_name :'Yakshit Jain',
+    handle: 'the.jina.24',
+    class_type:'BE',
+    overall_score:100
   }
 };
 

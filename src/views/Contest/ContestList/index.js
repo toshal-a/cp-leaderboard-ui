@@ -83,7 +83,7 @@ function applyPagination(contests, page, limit) {
 }
 
 const useStyles = makeStyles((theme) => ({
-  root: { flexGrow: 1 },
+  root: { flexGrow: 1},
   queryField: {
     width: 500,
   },
@@ -104,7 +104,7 @@ const useStyles = makeStyles((theme) => ({
 const ContestList = React.memo(({ className, contests, ...rest }) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
-  const [limit, setLimit] = React.useState(12);
+  const [limit, setLimit] = React.useState(10);
   const [query, setQuery] = React.useState("");
   const [filters, setFilters] = React.useState({
     phase: "BEFORE",
@@ -205,10 +205,10 @@ const ContestList = React.memo(({ className, contests, ...rest }) => {
       </AppBar>
       <Card className={clsx(classes.root, className)} {...rest}>
         <Divider />
-        <Grid container direction={(filters.phase === "BEFORE") ? "column-reverse" : "column"}  alignContent="center" spacing={2}>
+        <Grid container  direction={(filters.phase === "BEFORE") ? "column-reverse" : "column"}   alignContent="center" spacing={2}>
           {paginatedContests.map((contest) => {
             return (
-              <Grid key={contest.id} item >
+              <Grid key={contest.id} item  >
                 <ContestCard contest={contest} />
               </Grid>
             );
@@ -227,7 +227,7 @@ const ContestList = React.memo(({ className, contests, ...rest }) => {
           onChangeRowsPerPage={handleLimitChange}
           page={page}
           rowsPerPage={limit}
-          rowsPerPageOptions={[6, 12, 24, 48, 96]}
+          rowsPerPageOptions={[5, 10, 25, 50, 100]}
         />
       </AppBar>
     </React.Fragment>

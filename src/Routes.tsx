@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React from "react";
-import {Switch, Redirect, Route} from "react-router-dom";
+import { Switch, Redirect, Route } from "react-router-dom";
 import DashboardLayout from "layouts/DashboardLayout/index.jsx";
 import MainLayout from "layouts/MainLayout/index.jsx";
 import HomeView from "views/pages/HomeView/index.jsx";
@@ -23,11 +23,16 @@ const routesConfig = [
     path: "/login",
     component: React.lazy(() => import("views/auth/LoginView")),
   },
-  /*{
+  {
     exact: true,
-    path: '/register',
-    component: React.lazy(() => import('views/auth/RegisterView'))
-  },*/
+    path: "/confirm_email/:confirmationToken",
+    component: React.lazy(() => import("views/pages/EmailVerifiedView.jsx")),
+  },
+  {
+    exact: true,
+    path: "/register",
+    component: React.lazy(() => import("views/auth/RegisterView")),
+  },
   {
     path: "/app",
     guard: AuthGuard,
@@ -36,7 +41,7 @@ const routesConfig = [
       {
         exact: true,
         path: "/app",
-        component: () => <Redirect to="/app/welcome" />,
+        component: () => <Redirect to="/app/leaderboard" />,
       },
       {
         exact: true,
@@ -45,8 +50,8 @@ const routesConfig = [
       },
       {
         exact: true,
-        path: ['/app/contest','/app/contest/:contestId'],
-        component: React.lazy(() => import('views/Contest'))
+        path: ["/app/contest", "/app/contest/:contestId"],
+        component: React.lazy(() => import("views/Contest")),
       },
       {
         exact: true,
@@ -69,7 +74,7 @@ const routesConfig = [
         exact: true,
         path: "/app/welcome",
         component: React.lazy(() => import("views/pages/WelcomeView.jsx")),
-      }
+      },
     ],
   },
   {

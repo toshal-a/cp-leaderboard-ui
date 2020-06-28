@@ -46,7 +46,7 @@ const tabs = [
     label: "BE (FOURTH YEAR)",
   },
   {
-    value: "OTHER",
+    value: "Other",
     label: "OTHER",
   },
 ];
@@ -162,7 +162,7 @@ function Results({ className, customers, ...rest }) {
     SE: null,
     TE: null,
     BE: null,
-    OTHER: null,
+    Other: null,
   });
 
   const handleTabsChange = (event, value) => {
@@ -172,7 +172,7 @@ function Results({ className, customers, ...rest }) {
       SE: null,
       TE: null,
       BE: null,
-      OTHER: null,
+      Other: null,
     };
 
     if (value !== "all") {

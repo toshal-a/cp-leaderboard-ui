@@ -1,32 +1,41 @@
-import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import { useHistory } from 'react-router';
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Container,
-  Divider,
-  Link,
-  Typography,
-  makeStyles
-} from '@material-ui/core';
-import Page from 'src/components/Page';
-import Logo from 'src/components/Logo';
-import RegisterForm from './RegisterForm';
+import React from "react";
+import { Link as RouterLink } from "react-router-dom";
+import { useHistory } from "react-router";
+import CardHeader from "@material-ui/core/CardHeader";
+import Grid from "@material-ui/core/Grid";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
+import Container from "@material-ui/core/Container";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Divider from "@material-ui/core/Divider";
+import Link from "@material-ui/core/Link";
+import Typography from "@material-ui/core/Typography";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Page from "components/Page";
+import RegisterForm from "./RegisterForm";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    justifyContent: 'center',
     backgroundColor: theme.palette.background.dark,
-    display: 'flex',
-    height: '100%',
-    minHeight: '100%',
-    flexDirection: 'column',
-    paddingBottom: 80,
-    paddingTop: 80
-  }
+    display: "flex",
+    height: "100%",
+    minHeight: "100%",
+    flexDirection: "column",
+    justifyContent: "center",
+  },
+
+  content: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
 }));
 
 function RegisterView() {
@@ -34,57 +43,50 @@ function RegisterView() {
   const history = useHistory();
 
   const handleSubmitSuccess = () => {
-    history.push('/app/login');
+    history.push("/login");
   };
 
   return (
-    <Page
-      className={classes.root}
-      title="Register"
-    >
-      <Container maxWidth="sm">
-        <Box
-          mb={5}
-          display="flex"
-          alignItems="center"
-        >
-          <RouterLink to="/">
-            <Logo />
-          </RouterLink>
-          <Button
-            component={RouterLink}
-            to="/"
-            className={classes.backButton}
-          >
-            Back to home
-          </Button>
-        </Box>
-        <Card>
-          <CardContent>
-            <Typography
-              gutterBottom
-              variant="h2"
-              color="textPrimary"
-            >
-              Sign up
-            </Typography>
-            <Typography variant="subtitle1">
-              Sign up on the internal platform
-            </Typography>
+    <Page className={classes.root} title="Login">
+      <Container component="main" maxWidth="xs">
+        <Card className={classes.card}>
+          <CardHeader
+            avatar={
+              <Button
+                component={RouterLink}
+                to="/"
+                variant="outlined"
+                color="primary"
+              >
+                Back to home
+              </Button>
+            }
+          />
+
+          <CardContent className={classes.content}>
+            <Box>
+              <Avatar className={classes.avatar}>
+                <LockOutlinedIcon />
+              </Avatar>
+              <Typography component="h1" variant="h5">
+                Sign up
+              </Typography>
+            </Box>
             <Box mt={3}>
               <RegisterForm onSubmitSuccess={handleSubmitSuccess} />
             </Box>
+        
             <Box my={2}>
               <Divider />
             </Box>
-            <Link
-              component={RouterLink}
-              to="/login"
-              variant="body2"
-              color="textSecondary"
-            >
-              Have an account?
-            </Link>
+
+            <Grid container justify="flex-end">
+              <Grid item>
+                <Link component={RouterLink} to="/login" variant="body2">
+                  {" Already have an account? Sign in"}
+                </Link>
+              </Grid>
+            </Grid>
           </CardContent>
         </Card>
       </Container>
