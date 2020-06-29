@@ -60,7 +60,7 @@ function LoginView() {
             avatar={
               <Button
                 component={RouterLink}
-                to="/"
+                to="/home"
                 variant="outlined"
                 color="primary"
               >
