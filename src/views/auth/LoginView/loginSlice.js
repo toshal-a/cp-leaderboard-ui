@@ -62,12 +62,15 @@ export const logOut = () => async (dispatch) => {
   dispatch(logout());
 };
 
-export const updateProFile = (update) => (dispatch) => {
-  const request = axios.post("/api/account/profile", { update });
-
-  return (dispatch) => {
-    request.then((response) => dispatch(updateProfile(response.data)));
-  };
+export const updateProFile = (update) =>async (dispatch) => {
+  try{
+    console.log(update);
+    const response = await axios.put("https://api.cp-leaderboard.me/user/me", { ...update });
+    console.log(response.data);
+    dispatch(updateProfile(response.data));
+  }catch(error){
+    console.log(error);
+  }
 };
 
 export default loginSlice.reducer;

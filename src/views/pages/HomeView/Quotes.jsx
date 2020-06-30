@@ -32,7 +32,7 @@ function Testimonials({ className, ...rest }) {
           className={classes.title}
         >
           &quot;There are two ways to write error-free programs; only the third
-          one works.
+          one works.&quot;
         </Typography>
         <Box mt={6} mb={3} display="flex" justifyContent="center" alignItems="center">
           <Avatar />
