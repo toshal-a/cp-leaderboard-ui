@@ -54,19 +54,19 @@ const tabs = [
 const sortOptions = [
   {
     value: "avg_percent|desc",
-    label: "Average Percent (high to low)",
+    label: "Average Percentile (high to low)",
   },
   {
     value: "avg_percent|asc",
-    label: "Average Percent (low to high)",
+    label: "Average Percentile (low to high)",
   },
   {
     value: "aggr_percent|desc",
-    label: "Aggregate Percent (high to low)",
+    label: "Aggregate Percentile (high to low)",
   },
   {
     value: "aggr_percent|asc",
-    label: "Aggregate Percent (low to high)",
+    label: "Aggregate Percentile (low to high)",
   },
 ];
 
@@ -276,9 +276,9 @@ function Results({ className, customers, ...rest }) {
                 <TableCell>Name</TableCell>
                 <TableCell>Codeforces Handle</TableCell>
                 <TableCell>Class</TableCell>
-                <TableCell>Average %</TableCell>
-                <TableCell>Aggregate %</TableCell>
-                <TableCell>Contest Played</TableCell>
+                <TableCell>Average <br/> Percentile</TableCell>
+                <TableCell>Aggregate <br/> Percentile</TableCell>
+                <TableCell>Contest <br/> Played</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
