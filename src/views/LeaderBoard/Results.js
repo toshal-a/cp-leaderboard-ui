@@ -53,12 +53,20 @@ const tabs = [
 
 const sortOptions = [
   {
-    value: "overall_score|desc",
-    label: "Total score (high to low)",
+    value: "avg_percent|desc",
+    label: "Average Percent (high to low)",
   },
   {
-    value: "overall_score|asc",
-    label: "Total score (low to high)",
+    value: "avg_percent|asc",
+    label: "Average Percent (low to high)",
+  },
+  {
+    value: "aggr_percent|desc",
+    label: "Aggregate Percent (high to low)",
+  },
+  {
+    value: "aggr_percent|asc",
+    label: "Aggregate Percent (low to high)",
   },
 ];
 
@@ -268,7 +276,9 @@ function Results({ className, customers, ...rest }) {
                 <TableCell>Name</TableCell>
                 <TableCell>Codeforces Handle</TableCell>
                 <TableCell>Class</TableCell>
-                <TableCell>Total Score</TableCell>
+                <TableCell>Average %</TableCell>
+                <TableCell>Aggregate %</TableCell>
+                <TableCell>Contest Played</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -299,7 +309,9 @@ function Results({ className, customers, ...rest }) {
                       </Link>
                     </TableCell>
                     <TableCell>{customer.class_type}</TableCell>
-                    <TableCell>{customer.overall_score}</TableCell>
+                    <TableCell>{(customer.avg_percent) ? customer.avg_percent : '--'}</TableCell>
+                    <TableCell>{(customer.aggr_percent) ? customer.aggr_percent : '--' }</TableCell>
+                    <TableCell>{(customer.contests_played) ? customer.contests_played : '--'}</TableCell>
                   </TableRow>
                 );
               })}
