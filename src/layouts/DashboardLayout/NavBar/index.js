@@ -23,6 +23,7 @@ import {
   Trello as TrelloIcon,
   User as UserIcon,
   Flag as FlagIcon,
+  HelpCircle as HelpIcon,
 } from "react-feather";
 import Logo from "components/Logo";
 import NavItem from "./NavItem";
@@ -56,6 +57,16 @@ const navConfig = [
         title: "Account",
         href: "/app/account",
         icon: UserIcon,
+      },
+    ],
+  },
+  {
+    subheader: "Information",
+    items: [
+      {
+        title: "FAQs",
+        href: "/app/faq",
+        icon: HelpIcon,
       },
     ],
   },
