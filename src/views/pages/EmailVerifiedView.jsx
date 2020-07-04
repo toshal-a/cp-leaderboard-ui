@@ -72,7 +72,7 @@ function EmailVerifiedView() {
           <Button
             color="secondary"
             component={RouterLink}
-            to="/login"
+            to="/home"
             variant="outlined"
           >
             Go to Login

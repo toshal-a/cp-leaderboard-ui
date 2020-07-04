@@ -76,12 +76,7 @@ const routesConfig = [
         exact: true,
         path: "/app/errors/404",
         component: React.lazy(() => import("views/pages/Error404View.jsx")),
-      },
-      {
-        exact: true,
-        path: "/app/welcome",
-        component: React.lazy(() => import("views/pages/WelcomeView.jsx")),
-      },
+      }
     ],
   },
   {
