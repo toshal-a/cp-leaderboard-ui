@@ -76,7 +76,7 @@ function FAQS({ className, ...rest }) {
     <div className={clsx(classes.root, className)} {...rest}>
       <Container maxWidth="lg">
         <Typography variant="h1" color="textPrimary">
-          Frequently asked questions
+          <b>F</b>requently <b>A</b>sked <b>Q</b>uestions
         </Typography>
         <Box my={3}>
           <Divider />
@@ -126,8 +126,8 @@ function FAQS({ className, ...rest }) {
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
                 <Typography>
-                  Nothing at this moment, but in future prizes and recognition
-                  for top performers will be there.
+                  Currently, top performers of every month will get recognition.
+                  In future, prizes will also be made available.
                 </Typography>
               </ExpansionPanelDetails>
             </ExpansionPanel>
