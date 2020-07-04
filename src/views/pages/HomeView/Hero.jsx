@@ -6,11 +6,13 @@ import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import LoginView from "views/auth/LoginView";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.dark,
-    paddingTop: 50,
+    paddingTop: 200,
+    paddingBottom: 200,
     [theme.breakpoints.down("md")]: {
       paddingTop: 60,
       paddingBottom: 60,
@@ -45,35 +47,41 @@ function Hero({ className, ...rest }) {
   return (
     <div className={clsx(classes.root, className)} {...rest}>
       <Container maxWidth="lg">
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={5}>
-            <Box
-              display="flex"
-              flexDirection="column"
-              justifyContent="center"
-              height="100%"
-            >
-              <Typography variant="overline" color="secondary">
-                Introducing
-              </Typography>
-              <Typography variant="h1" color="textPrimary">
-                CP-Leaderboard
-              </Typography>
-              <Box mt={3}>
-                <Typography variant="h3" color="textSecondary">
-                  A leaderboard for competitive programmers.
+        <Grid container alignItems="center">
+          <Grid container justify="center" item xs={12} md={7} lg={8}  xl={8}>
+            <Grid item xs={12}>
+              <Box
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"
+              >
+                <Typography variant="overline" color="secondary">
+                  Introducing
                 </Typography>
+                <Typography variant="h1" color="textPrimary">
+                  CP-Leaderboard
+                </Typography>
+                <Box mt={3}>
+                  <Typography variant="h3" color="textSecondary">
+                    A leaderboard for competitive programmers.
+                  </Typography>
+                </Box>
               </Box>
-            </Box>
+            </Grid>
+            <Grid item xs={12} sm={10}>
+              <Box position="relative">
+                <div className={classes.image}>
+                  <img
+                    alt="Presentation"
+                    src="/static/home/undraw_visual_data_b1wx.svg"
+                  />
+                </div>
+              </Box>
+            </Grid>
           </Grid>
-          <Grid item xs={12} md={7}>
-            <Box position="relative">
-              <div className={classes.image}>
-                <img
-                  alt="Presentation"
-                  src="/static/home/undraw_visual_data_b1wx.svg"
-                />
-              </div>
+          <Grid item xs={12} md={5} lg={4} xl={4}>
+            <Box my={4}>
+            <LoginView />
             </Box>
           </Grid>
         </Grid>

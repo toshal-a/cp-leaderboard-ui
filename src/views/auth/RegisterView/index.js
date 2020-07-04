@@ -45,7 +45,7 @@ function RegisterView() {
   const [showActivateAccount, setShowActivateAccount] = React.useState(false);
 
   const handleSubmitSuccess = () => {
-    history.push("/login");
+    history.push("/home");
   };
 
   const handleShowActivateAccount = () => {

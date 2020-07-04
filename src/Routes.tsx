@@ -20,11 +20,6 @@ const routesConfig = [
   },
   {
     exact: true,
-    path: "/login",
-    component: React.lazy(() => import("views/auth/LoginView")),
-  },
-  {
-    exact: true,
     path: "/confirm_email/:confirmationToken",
     component: React.lazy(() => import("views/pages/EmailVerifiedView.jsx")),
   },

@@ -1,10 +1,8 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { useHistory } from "react-router";
-import CardHeader from "@material-ui/core/CardHeader";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
@@ -14,20 +12,10 @@ import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Page from "components/Page";
 import LoginForm from "./LoginForm";
 import PasswordResetForm from "./PasswordResetForm";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: theme.palette.background.dark,
-    display: "flex",
-    height: "100%",
-    minHeight: "100%",
-    flexDirection: "column",
-    justifyContent: "center",
-  },
-
   content: {
     display: "flex",
     flexDirection: "column",
@@ -53,22 +41,8 @@ function LoginView() {
   };
 
   return (
-    <Page className={classes.root} title="Login">
       <Container component="main" maxWidth="xs">
-        <Card className={classes.card}>
-          <CardHeader
-            avatar={
-              <Button
-                component={RouterLink}
-                to="/home"
-                variant="outlined"
-                color="primary"
-              >
-                Back to home
-              </Button>
-            }
-          />
-
+        <Card>
           <CardContent className={classes.content}>
             <Box>
               <Avatar className={classes.avatar}>
@@ -103,7 +77,6 @@ function LoginView() {
           </CardContent>
         </Card>
       </Container>
-    </Page>
   );
 }
 

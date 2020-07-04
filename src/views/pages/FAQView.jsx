@@ -7,6 +7,7 @@ import MuiExpansionPanel from "@material-ui/core/ExpansionPanel";
 import MuiExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import MuiExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
+import Link from '@material-ui/core/Link';
 import Page from "components/Page";
 
 const useStyles = makeStyles((theme) => ({
@@ -58,6 +59,7 @@ const ExpansionPanelDetails = withStyles((theme) => ({
     padding: theme.spacing(2),
   },
 }))(MuiExpansionPanelDetails);
+
 function FAQView() {
   const classes = useStyles();
 
@@ -120,8 +122,7 @@ function FAQView() {
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
               <Typography>
-                Nothing at this moment, but in future prizes and recognition for
-                top performers will be there.
+              Currently, top performers of every month will get recognition. In future, prizes will also be made available.
               </Typography>
             </ExpansionPanelDetails>
           </ExpansionPanel>
@@ -158,7 +159,7 @@ function FAQView() {
               id="panel4d-header"
             >
               <Typography color={(expanded === "panel4") ? "primary" : 'inherit'}>
-                4) How our score for a particular contest is calculated??
+                4) How our score for a particular contest is calculated?
               </Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
@@ -189,6 +190,25 @@ function FAQView() {
                 number of participants might vary in different contests. So, a
                 percentile-based ranking helps in better analysis of your
                 performance.
+              </Typography>
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+          <ExpansionPanel
+            square
+            expanded={expanded === "panel6"}
+            onChange={handleChange("panel6")}
+          >
+            <ExpansionPanelSummary
+              aria-controls="panel6d-content"
+              id="panel6d-header"
+            >
+              <Typography color={(expanded === "panel6") ? "primary" : 'inherit'}>
+                6) I am facing some problem / I am having some suggestion. Where can I submit my queries / suggestions?
+              </Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              <Typography>
+               You can submit your queries / suggestions at <Link href={`mailto:feedback@cp-leaderboard.me`}>feedback@cp-leaderboard.me</Link> 
               </Typography>
             </ExpansionPanelDetails>
           </ExpansionPanel>

@@ -8,7 +8,7 @@ function AuthGuard({ children }) {
   const account = useSelector((state : RootState) => state.login);
 
   if (!account.user) {
-    return <Redirect to="/login" />;
+    return <Redirect to="/home" />;
   }
 
   return children;
