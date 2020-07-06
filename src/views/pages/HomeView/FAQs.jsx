@@ -168,7 +168,7 @@ function FAQS({ className, ...rest }) {
                 <Typography
                   color={expanded === "panel4" ? "primary" : "inherit"}
                 >
-                  4) How our score for a particular contest is calculated??
+                  4) How our score for a particular contest is calculated?
                 </Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
