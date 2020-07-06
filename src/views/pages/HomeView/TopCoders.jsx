@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
   card: {
     backgroundColor: "rgba(0,0,0,0.1)",
+    minHeight: "100%",
   },
 }));
 
@@ -116,7 +117,7 @@ function TopCoders({ className, ...rest }) {
             </Typography>
           </Toolbar>
         </AppBar>
-        <Container maxWidth="lg">
+      
           <Card >
             <Divider />
             <Box overflow="auto">
@@ -185,7 +186,6 @@ function TopCoders({ className, ...rest }) {
               </Table>
             </Box>
           </Card>
-        </Container>
       </Dialog>
     </div>
   );
