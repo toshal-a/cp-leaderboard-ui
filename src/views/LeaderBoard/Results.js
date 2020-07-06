@@ -68,6 +68,14 @@ const sortOptions = [
     value: "aggr_percent|asc",
     label: "Aggregate Percentile (low to high)",
   },
+  {
+    value: "contests_played|asc",
+    label: "Contests Played (low to high)",
+  },
+  {
+    value: "contests_played|desc",
+    label: "Contests Played (high to low)",
+  },
 ];
 
 function applyFilters(customers, query, filters) {
@@ -273,18 +281,26 @@ function Results({ className, customers, ...rest }) {
           <Table>
             <TableHead>
               <TableRow>
+                <TableCell>Sr.No.</TableCell>
                 <TableCell>Name</TableCell>
                 <TableCell>Codeforces Handle</TableCell>
                 <TableCell>Class</TableCell>
-                <TableCell>Average <br/> Percentile</TableCell>
-                <TableCell>Aggregate <br/> Percentile</TableCell>
-                <TableCell>Contest <br/> Played</TableCell>
+                <TableCell>
+                  Average <br /> Percentile
+                </TableCell>
+                <TableCell>
+                  Aggregate <br /> Percentile
+                </TableCell>
+                <TableCell>
+                  Contest <br /> Played
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {paginatedCustomers.map((customer) => {
+              {paginatedCustomers.map((customer, index) => {
                 return (
                   <TableRow hover key={customer.id}>
+                    <TableCell>{index+1}</TableCell>
                     <TableCell>
                       <Box display="flex" alignItems="center">
                         <Avatar className={classes.avatar}>
@@ -309,9 +325,17 @@ function Results({ className, customers, ...rest }) {
                       </Link>
                     </TableCell>
                     <TableCell>{customer.class_type}</TableCell>
-                    <TableCell>{(customer.avg_percent) ? customer.avg_percent : '--'}</TableCell>
-                    <TableCell>{(customer.aggr_percent) ? customer.aggr_percent : '--' }</TableCell>
-                    <TableCell>{(customer.contests_played) ? customer.contests_played : '--'}</TableCell>
+                    <TableCell>
+                      {customer.avg_percent ? customer.avg_percent : "--"}
+                    </TableCell>
+                    <TableCell>
+                      {customer.aggr_percent ? customer.aggr_percent : "--"}
+                    </TableCell>
+                    <TableCell>
+                      {customer.contests_played
+                        ? customer.contests_played
+                        : "--"}
+                    </TableCell>
                   </TableRow>
                 );
               })}
