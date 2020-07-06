@@ -4,7 +4,6 @@ import clsx from "clsx";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import LoginView from "views/auth/LoginView";
@@ -85,32 +84,6 @@ function Hero({ className, ...rest }) {
             <LoginView />
             </Box>
           </Grid>
-          <Grid item xs={12} >
-            <Box pt={6}>
-        <Typography
-          variant="h2"
-          align="center"
-          color="textPrimary"
-        >
-          Wanna have a look at Top 10 ? 
-        </Typography>
-        <Box
-          mt={2}
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Button
-            color="secondary"
-            component="a"
-            href="https://material-ui.com/store/items/devias-kit-pro"
-            variant="contained"
-          >
-            Click HERE !!
-          </Button>
-        </Box>
-        </Box>
-        </Grid>
         </Grid>
        
       </Container>
