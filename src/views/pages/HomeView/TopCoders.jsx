@@ -100,7 +100,6 @@ const useStyles = makeStyles((theme) => ({
     overflowY: "auto",
   },
   sortField: {
-    marginLeft: theme.spacing(2),
     flexBasis: 200,
   },
 }));
@@ -154,6 +153,7 @@ function TopCoders({ className, ...rest }) {
       </Container>
       <Dialog fullScreen open={open} onClose={handleClose}>
         <AppBar position="sticky" color="inherit">
+            <Box p={1}>
           <Toolbar>
             <IconButton
               edge="start"
@@ -184,12 +184,13 @@ function TopCoders({ className, ...rest }) {
               ))}
             </TextField>
           </Toolbar>
+          </Box>
         </AppBar>
 
         <Card className={classes.card}>
           <Divider />
           <Box overflow="auto">
-            <Table>
+            <Table stickyHeader>
               <TableHead>
                 <TableRow>
                   <TableCell>Sr.No.</TableCell>
