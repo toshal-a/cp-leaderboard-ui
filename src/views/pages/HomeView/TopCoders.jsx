@@ -46,8 +46,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
   },
   card: {
-    backgroundColor: "rgba(0,0,0,0.1)",
-    minHeight: "100%",
+    overflowY: "auto",
   },
 }));
 
@@ -92,16 +91,7 @@ function TopCoders({ className, ...rest }) {
           </Button>
         </Box>
       </Container>
-      <Dialog
-        PaperProps={{
-          classes: {
-            root: classes.card,
-          },
-        }}
-        fullScreen
-        open={open}
-        onClose={handleClose}
-      >
+      <Dialog fullScreen open={open} onClose={handleClose}>
         <AppBar className={classes.appBar} color="inherit">
           <Toolbar>
             <IconButton
@@ -117,75 +107,75 @@ function TopCoders({ className, ...rest }) {
             </Typography>
           </Toolbar>
         </AppBar>
-      
-          <Card >
-            <Divider />
-            <Box overflow="auto">
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Sr.No.</TableCell>
-                    <TableCell>Name</TableCell>
-                    <TableCell>Codeforces Handle</TableCell>
-                    <TableCell>Class</TableCell>
-                    <TableCell>
-                      Average <br /> Percentile
-                    </TableCell>
-                    <TableCell>
-                      Aggregate <br /> Percentile
-                    </TableCell>
-                    <TableCell>
-                      Contest <br /> Played
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {topcoders.map((customer, index) => {
-                    return (
-                      <TableRow hover key={customer.id}>
-                        <TableCell>{index + 1}</TableCell>
-                        <TableCell>
-                          <Box display="flex" alignItems="center">
-                            <Avatar className={classes.avatar}>
-                              {getInitials(customer.full_name)}
-                            </Avatar>
-                            <div>
-                              {customer.full_name}
-                              <Typography variant="body2" color="textSecondary">
-                                {customer.email}
-                              </Typography>
-                            </div>
-                          </Box>
-                        </TableCell>
-                        <TableCell>
-                          <Link
-                            color="inherit"
-                            href={`https://codeforces.com/profile/${customer.handle}`}
-                            target="_blank"
-                            rel="noopener"
-                          >
-                            {customer.handle}
-                          </Link>
-                        </TableCell>
-                        <TableCell>{customer.class_type}</TableCell>
-                        <TableCell>
-                          {customer.avg_percent ? customer.avg_percent : "--"}
-                        </TableCell>
-                        <TableCell>
-                          {customer.aggr_percent ? customer.aggr_percent : "--"}
-                        </TableCell>
-                        <TableCell>
-                          {customer.contests_played
-                            ? customer.contests_played
-                            : "--"}
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
-                </TableBody>
-              </Table>
-            </Box>
-          </Card>
+
+        <Card className={classes.card}>
+          <Divider />
+          <Box overflow="auto">
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Sr.No.</TableCell>
+                  <TableCell>Name</TableCell>
+                  <TableCell>Codeforces Handle</TableCell>
+                  <TableCell>Class</TableCell>
+                  <TableCell>
+                    Average <br /> Percentile
+                  </TableCell>
+                  <TableCell>
+                    Aggregate <br /> Percentile
+                  </TableCell>
+                  <TableCell>
+                    Contest <br /> Played
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {topcoders.map((customer, index) => {
+                  return (
+                    <TableRow hover key={customer.id}>
+                      <TableCell>{index + 1}</TableCell>
+                      <TableCell>
+                        <Box display="flex" alignItems="center">
+                          <Avatar className={classes.avatar}>
+                            {getInitials(customer.full_name)}
+                          </Avatar>
+                          <div>
+                            {customer.full_name}
+                            <Typography variant="body2" color="textSecondary">
+                              {customer.email}
+                            </Typography>
+                          </div>
+                        </Box>
+                      </TableCell>
+                      <TableCell>
+                        <Link
+                          color="inherit"
+                          href={`https://codeforces.com/profile/${customer.handle}`}
+                          target="_blank"
+                          rel="noopener"
+                        >
+                          {customer.handle}
+                        </Link>
+                      </TableCell>
+                      <TableCell>{customer.class_type}</TableCell>
+                      <TableCell>
+                        {customer.avg_percent ? customer.avg_percent : "--"}
+                      </TableCell>
+                      <TableCell>
+                        {customer.aggr_percent ? customer.aggr_percent : "--"}
+                      </TableCell>
+                      <TableCell>
+                        {customer.contests_played
+                          ? customer.contests_played
+                          : "--"}
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </Box>
+        </Card>
       </Dialog>
     </div>
   );
