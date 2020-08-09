@@ -42,12 +42,12 @@ const navConfig = [
         href: "/app/contest",
         icon: FlagIcon,
       },
-      {
+     /* {
         title: "Live Contest",
         href: "/app/livecontest",
         icon: ActivityIcon,
         info: () => <Chip color="secondary" size="small" label="Coming Soon" />,
-      },
+      },*/
     ],
   },
   {

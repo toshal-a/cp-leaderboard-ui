@@ -6,40 +6,68 @@ import {
   Typography,
   Breadcrumbs,
   Link,
+  Grid,
+  Button,
   makeStyles
 } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-
+import { useDispatch } from 'react-redux';
+import  { openNewMessage } from './accountSlice';
 const useStyles = makeStyles(() => ({
   root: {}
 }));
 
 function Header({ className, ...rest }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const handleFeedbackClick = () => {
+    dispatch(openNewMessage());
+  };
 
   return (
     <div
       className={clsx(classes.root, className)}
       {...rest}
     >
-      <Breadcrumbs
-        separator={<NavigateNextIcon fontSize="small" />}
-        aria-label="breadcrumb"
+      <Grid
+        container
+        spacing={3}
+        justify="space-between"
+        className={clsx(classes.root, className)}
+        {...rest}
       >
-        <Link color="inherit" to="/app" component={RouterLink}>
-          Dashboard
+        <Grid item>
+          <Breadcrumbs
+            separator={<NavigateNextIcon fontSize="small" />}
+            aria-label="breadcrumb"
+          >
+            <Link color="inherit" to="/app" component={RouterLink}>
+              Dashboard
         </Link>
-        <Typography color="textPrimary">
-          Account
+            <Typography color="textPrimary">
+              Account
         </Typography>
-      </Breadcrumbs>
-      <Typography
-        variant="h3"
-        color="textPrimary"
-      >
-        Settings
+          </Breadcrumbs>
+          <Typography
+            variant="h3"
+            color="textPrimary"
+          >
+            Settings
       </Typography>
+        </Grid>
+        <Grid item>
+          <Button
+            color="secondary"
+            variant="contained"
+            onClick={handleFeedbackClick}
+          >
+            Feedback
+      </Button>
+        </Grid>
+      </Grid>
     </div>
+
   );
 }
 

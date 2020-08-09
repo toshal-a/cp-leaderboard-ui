@@ -300,7 +300,7 @@ function Results({ className, customers, ...rest }) {
               {paginatedCustomers.map((customer, index) => {
                 return (
                   <TableRow hover key={customer.id}>
-                    <TableCell>{index+1}</TableCell>
+                    <TableCell>{index+1 + page*limit}</TableCell>
                     <TableCell>
                       <Box display="flex" alignItems="center">
                         <Avatar className={classes.avatar}>

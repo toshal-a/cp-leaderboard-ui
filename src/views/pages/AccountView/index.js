@@ -11,6 +11,7 @@ import Page from 'components/Page.jsx';
 import Header from './Header';
 import General from './General';
 import Security from './Security';
+import Feedback from './General/Feedback';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -64,6 +65,7 @@ function AccountView() {
           {currentTab === 'security' && <Security />}
         </Box>
       </Container>
+      <Feedback/>
     </Page>
   );
 }

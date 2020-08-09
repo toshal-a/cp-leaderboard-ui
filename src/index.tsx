@@ -1,6 +1,7 @@
 import "react-app-polyfill/ie11";
 import "react-app-polyfill/stable";
 import "react-perfect-scrollbar/dist/css/styles.css";
+import 'react-quill/dist/quill.snow.css';
 import "nprogress/nprogress.css";
 import React from "react";
 import ReactDOM from "react-dom";
