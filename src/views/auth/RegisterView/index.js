@@ -94,7 +94,7 @@ function RegisterView() {
               </Grid>
               <Box my={1}></Box>
               <Grid item>
-                <Link component={RouterLink} to="/login" variant="body2">
+                <Link component={RouterLink} to="/home" variant="body2">
                   {" Already have an account? Sign in"}
                 </Link>
               </Grid>
