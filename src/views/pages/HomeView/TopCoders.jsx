@@ -139,7 +139,7 @@ function TopCoders({ className, ...rest }) {
     <div className={clsx(classes.root, className)} {...rest}>
       <Container maxWidth="lg">
         <Typography variant="h1" align="center" color="textPrimary">
-          Wanna checkout the Top Coders?
+          Wanna checkout the Top Coders of PICT?
         </Typography>
         <Box mt={6} display="flex" justifyContent="center" alignItems="center">
           <Button
