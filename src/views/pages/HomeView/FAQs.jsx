@@ -14,7 +14,7 @@ import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: theme.palette.background.dark,
     paddingTop: theme.spacing(6),
     paddingBottom: theme.spacing(6),
     "& dt": {
@@ -42,7 +42,7 @@ const ExpansionPanel = withStyles({
 
 const ExpansionPanelSummary = withStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.background.dark,
+    backgroundColor: "rgba(0, 0, 0, .03)",
     borderBottom: "1px solid rgba(0, 0, 0, .125)",
     marginBottom: -1,
     minHeight: 56,
@@ -194,7 +194,7 @@ function FAQS({ className, ...rest }) {
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
                 <Typography>
-                  We are declaring top performers every month so a percentile based system helps in tracking top performers of month correctly.
+                  We are declaring top performers every month so a percentile-based system helps in tracking top performers of month correctly.
                 </Typography>
               </ExpansionPanelDetails>
             </ExpansionPanel>

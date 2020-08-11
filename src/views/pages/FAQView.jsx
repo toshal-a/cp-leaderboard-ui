@@ -185,7 +185,7 @@ function FAQView() {
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
               <Typography>
-              We are declaring top performers every month so a percentile based system helps in tracking top performers of month correctly.
+              We are declaring top performers every month so a percentile-based system helps in tracking top performers of month correctly.
               </Typography>
             </ExpansionPanelDetails>
           </ExpansionPanel>
