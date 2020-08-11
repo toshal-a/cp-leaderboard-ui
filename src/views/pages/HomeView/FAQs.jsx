@@ -95,7 +95,7 @@ function FAQS({ className, ...rest }) {
                 <Typography
                   color={expanded === "panel1" ? "primary" : "inherit"}
                 >
-                  1) How does this portal help me and why should I register?
+                  1. How does this portal help me and why should I register?
                 </Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
@@ -104,8 +104,7 @@ function FAQS({ className, ...rest }) {
                   with your friends in coding contests.
                   <br />
                   It helps to self analyze your performance in a better way, as
-                  it ranks you based on your percentile in the contest instead
-                  of the rating.
+                  it ranks you based on your percentile in the contest.
                 </Typography>
               </ExpansionPanelDetails>
             </ExpansionPanel>
@@ -121,7 +120,7 @@ function FAQS({ className, ...rest }) {
                 <Typography
                   color={expanded === "panel2" ? "primary" : "inherit"}
                 >
-                  2) Are there any prizes if we top the leaderboard?
+                  2. Are there any prizes if we top the leaderboard?
                 </Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
@@ -143,7 +142,7 @@ function FAQS({ className, ...rest }) {
                 <Typography
                   color={expanded === "panel3" ? "primary" : "inherit"}
                 >
-                  3) Can I track my performance in a particular contest?
+                  3. Can I track my performance in a particular contest?
                 </Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
@@ -168,7 +167,7 @@ function FAQS({ className, ...rest }) {
                 <Typography
                   color={expanded === "panel4" ? "primary" : "inherit"}
                 >
-                  4) How our score for a particular contest is calculated?
+                  4. How our score for a particular contest is calculated?
                 </Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
@@ -190,17 +189,12 @@ function FAQS({ className, ...rest }) {
                 <Typography
                   color={expanded === "panel5" ? "primary" : "inherit"}
                 >
-                  5) Why percentile-based ranking system, if we already have
-                  ratings and ranks?
+                  5. Why a percentile-based ranking system?
                 </Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
                 <Typography>
-                  Generally, a rating that you get in contests is based upon
-                  your previous performance; but rank could be quite misleading
-                  as the number of participants might vary in different
-                  contests. So, a percentile-based ranking helps in better
-                  analysis of your performance.
+                  We are declaring top performers every month so a percentile based system helps in tracking top performers of month correctly.
                 </Typography>
               </ExpansionPanelDetails>
             </ExpansionPanel>
@@ -216,7 +210,7 @@ function FAQS({ className, ...rest }) {
                 <Typography
                   color={expanded === "panel6" ? "primary" : "inherit"}
                 >
-                  6) I am facing some problem / I am having some suggestion.
+                  6. I am facing some problem / I am having some suggestion.
                   Where can I submit my queries / suggestions?
                 </Typography>
               </ExpansionPanelSummary>
