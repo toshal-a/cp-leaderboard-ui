@@ -26,7 +26,7 @@ import green from "@material-ui/core/colors/green";
 import Chip from "@material-ui/core/Chip";
 import getInitials from "utils/getInitials";
 
-function applyFilters(contestants, query,showUnoffical) {
+function applyFilters(contestants, query, showUnofficial) {
   return contestants.filter((contestant) => {
     let matches = true;
 
@@ -49,7 +49,7 @@ function applyFilters(contestants, query,showUnoffical) {
       }
     }
 
-    if(contestant.party.participantType !== 'CONTESTANT' && !showUnoffical){
+    if(contestant.party.participantType !== 'CONTESTANT' && !showUnofficial){
       matches = false;
     }
 
@@ -83,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
   },
-  showUnofficalField: {
+  showUnofficialField: {
     marginLeft: theme.spacing(2)
   },
 }));
@@ -93,7 +93,7 @@ function StandingList({ className, contestants, problems, ...rest }) {
   const [page, setPage] = React.useState(0);
   const [limit, setLimit] = React.useState(10);
   const [query, setQuery] = React.useState("");
-  const [showUnoffical,setShowUnoffical] = React.useState(false);
+  const [showUnofficial, setShowUnofficial] = React.useState(false);
 
   const handleQueryChange = (event) => {
     event.persist();
@@ -110,11 +110,11 @@ function StandingList({ className, contestants, problems, ...rest }) {
 
   const handleShowUnofficial = (event) => {
     event.persist();
-    setShowUnoffical((oldShowUnoffical) => !oldShowUnoffical);
+    setShowUnofficial((oldShowUnofficial) => !oldShowUnofficial);
   };
 
   // Usually query is done on backend with indexing solutions
-  const filteredcontestants = applyFilters(contestants, query, showUnoffical);
+  const filteredcontestants = applyFilters(contestants, query, showUnofficial);
   const paginatedcontestants = applyPagination(
     filteredcontestants,
     page,
@@ -144,15 +144,15 @@ function StandingList({ className, contestants, problems, ...rest }) {
           <Box flexGrow={1} />
           <Typography variant="body2" color="textPrimary">
           <FormControlLabel
-            className={classes.showUnofficalField}
+            className={classes.showUnofficialField}
             control={(
               <Checkbox
-                checked={showUnoffical}
+                checked={showUnofficial}
                 onChange={handleShowUnofficial}
-                name="showUnoffical"
+                name="showUnofficial"
               />
             )}
-            label="Show Unoffical"
+            label="Show Unofficial"
           />
           </Typography>
         </Box>
