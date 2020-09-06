@@ -4,9 +4,11 @@ import clsx from "clsx";
 import PropTypes from "prop-types";
 import Avatar from "@material-ui/core/Avatar";
 import AppBar from "@material-ui/core/AppBar";
+import Button from '@material-ui/core/Button';
 import Box from "@material-ui/core/Box";
 import Card from "@material-ui/core/Card";
 import Divider from "@material-ui/core/Divider";
+import Grid from '@material-ui/core/Grid';
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Link from "@material-ui/core/Link";
 import SvgIcon from "@material-ui/core/SvgIcon";
@@ -22,7 +24,13 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import { Search as SearchIcon } from "react-feather";
+import { withStyles } from '@material-ui/core/styles';
+
+import ConfirmationDialogRaw from "./SortModal";
+import FilterDialogRaw from "./FilterModal";
+import LoadingScreen from "components/LoadingScreen";
 import getInitials from "utils/getInitials";
+import axios from "utils/axios";
 
 const tabs = [
   {
@@ -53,28 +61,47 @@ const tabs = [
 
 const sortOptions = [
   {
-    value: "avg_percent|desc",
+    value: "avg_percent|avg_percentile|desc",
     label: "Average Percentile (high to low)",
   },
   {
-    value: "avg_percent|asc",
+    value: "avg_percent|avg_percentile|asc",
     label: "Average Percentile (low to high)",
   },
   {
-    value: "aggr_percent|desc",
+    value: "aggr_percent|aggr_percentile|desc",
     label: "Aggregate Percentile (high to low)",
   },
   {
-    value: "aggr_percent|asc",
+    value: "aggr_percent|aggr_percentile|asc",
     label: "Aggregate Percentile (low to high)",
   },
   {
-    value: "contests_played|asc",
+    value: "contests_played|contests_played|asc",
     label: "Contests Played (low to high)",
   },
   {
-    value: "contests_played|desc",
+    value: "contests_played|contests_played|desc",
     label: "Contests Played (high to low)",
+  },
+];
+
+const monthOptions = [
+  {
+    value: "0",
+    label: "None",
+  },
+  {
+    value: "7",
+    label: "July",
+  },
+  {
+    value: "8",
+    label: "August",
+  },
+  {
+    value: "9",
+    label: "September",
   },
 ];
 
@@ -130,23 +157,6 @@ function getComparator(order, orderBy) {
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-function applySort(customers, sort) {
-  const [orderBy, order] = sort.split("|");
-  const comparator = getComparator(order, orderBy);
-  const stabilizedThis = customers.map((el, index) => [el, index]);
-
-  stabilizedThis.sort((a, b) => {
-    // eslint-disable-next-line no-shadow
-    const order = comparator(a[0], b[0]);
-
-    if (order !== 0) return order;
-
-    return a[1] - b[1];
-  });
-
-  return stabilizedThis.map((el) => el[0]);
-}
-
 const useStyles = makeStyles((theme) => ({
   root: { flexGrow: 1 },
   queryField: {
@@ -164,15 +174,24 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(2),
     flexBasis: 200,
   },
+  gridItem: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1)
+  },
 }));
 
-function Results({ className, customers, ...rest }) {
+function Results({ className,...rest }) {
+
+  const [customers, setCustomers] = React.useState(null);
   const classes = useStyles();
   const [currentTab, setCurrentTab] = React.useState("all");
   const [page, setPage] = React.useState(0);
   const [limit, setLimit] = React.useState(10);
   const [query, setQuery] = React.useState("");
   const [sort, setSort] = React.useState(sortOptions[0].value);
+  const [month, setMonth] = React.useState(monthOptions[0].value);
   const [filters, setFilters] = React.useState({
     FE: null,
     SE: null,
@@ -180,6 +199,51 @@ function Results({ className, customers, ...rest }) {
     BE: null,
     Other: null,
   });
+  const getCustomers = () => {
+    if (month === "0") {
+      axios.get("https://api.cp-leaderboard.me/user/").then((response) => {
+          setCustomers(response.data);
+      })
+   }
+   else {
+    axios.get("https://api.cp-leaderboard.me/user/month?year=2020&month="
+        + month.toString()).then((response) => {
+      setCustomers(response.data);
+    })
+   }
+  }
+
+  React.useEffect(
+    getCustomers
+  , [month]);
+
+  const [openFilterModal, setOpenFilterModal] = React.useState(false);
+  
+  const handleFilterModalOpen = () => {
+    setOpenFilterModal(true);
+  };
+
+  const handleFilterModalClose = (newMonthValue) => {
+    setOpenFilterModal(false)
+
+    if (newMonthValue) {
+      setMonth(newMonthValue);
+    }
+  }
+
+  const [openSortModal, setOpenSortModal] = React.useState(false);
+
+  const handleSortModalOpen = () => {
+    setOpenSortModal(true)
+  }
+
+  const handleSortModalClose = (newSortValue) => {
+    setOpenSortModal(false)
+
+    if (newSortValue) {
+      setSort(newSortValue);
+    }
+  }
 
   const handleTabsChange = (event, value) => {
     const updatedFilters = {
@@ -204,11 +268,6 @@ function Results({ className, customers, ...rest }) {
     setQuery(event.target.value);
   };
 
-  const handleSortChange = (event) => {
-    event.persist();
-    setSort(event.target.value);
-  };
-
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
   };
@@ -217,7 +276,36 @@ function Results({ className, customers, ...rest }) {
     setLimit(event.target.value);
   };
 
-  // Usually query is done on backend with indexing solutions
+
+  const FilterButton = withStyles({
+    root: {
+      padding: '18.5px 14px',
+      lineHeight: "inherit",
+      display: "inline",
+      width: "100%",  
+      flexShrink: 1,
+      flexGrow: 1,
+    },
+  })(Button);
+
+  const applySort = (customers, sort) => {
+    const [orderBy, orderByOne, order] = sort.split("|");
+    const comparator = (month ===  "0") ? getComparator(order, orderBy) : getComparator(order, orderByOne);
+    const stabilizedThis = customers.map((el, index) => [el, index]);
+  
+    stabilizedThis.sort((a, b) => {
+      // eslint-disable-next-line no-shadow
+      const order = comparator(a[0], b[0]);
+  
+      if (order !== 0) return order;
+  
+      return a[1] - b[1];
+    });
+  
+    return stabilizedThis.map((el) => el[0]);
+  }
+
+  if (customers) {
   const filteredCustomers = applyFilters(customers, query, filters);
   const sortedCustomers = applySort(filteredCustomers, sort);
   const paginatedCustomers = applyPagination(sortedCustomers, page, limit);
@@ -239,9 +327,10 @@ function Results({ className, customers, ...rest }) {
         </Tabs>
       </AppBar>
       <AppBar position="sticky" color="inherit">
-        <Box p={1} display="flex" alignItems="center">
+        <Grid container>
+          <Grid item xs className={classes.gridItem}>
           <TextField
-            className={classes.queryField}
+            fullWidth
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -256,25 +345,44 @@ function Results({ className, customers, ...rest }) {
             value={query}
             variant="outlined"
           />
-          <Box flexGrow={1} />
-          <TextField
-            className={classes.sortField}
-            label="Sort By"
-            name="sort"
-            onChange={handleSortChange}
-            select
-            SelectProps={{ native: true }}
-            value={sort}
-            variant="outlined"
-          >
-            {sortOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </TextField>
-        </Box>
+          </Grid>
+          <Grid item xs className={classes.gridItem}>
+          <FilterButton 
+            variant="outlined" 
+            fullWidth
+            color="textPrimary"    
+            disableElevation
+            onClick = {handleFilterModalOpen}>
+              Filter
+          </FilterButton>
+          </Grid>
+          <Grid item xs className={classes.gridItem}>
+          <FilterButton 
+            fullWidth
+            variant="outlined" 
+            color="textPrimary"    
+            disableElevation
+            onClick = {handleSortModalOpen}>
+              Sort
+          </FilterButton>
+          </Grid>
+        </Grid>
       </AppBar>
+      <ConfirmationDialogRaw 
+        id="sort-modal"
+        keepMounted
+        open={openSortModal}
+        onClose={handleSortModalClose}
+        value={sort}
+      />
+      <FilterDialogRaw 
+        id="filter-modal"
+        keepMounted
+        open={openFilterModal}
+        onClose={handleFilterModalClose}
+        value={month}
+      />
+
       <Card className={clsx(classes.root, className)} {...rest}>
         <Divider />
         <Box overflow="auto">
@@ -326,10 +434,12 @@ function Results({ className, customers, ...rest }) {
                     </TableCell>
                     <TableCell>{customer.class_type}</TableCell>
                     <TableCell>
-                      {customer.avg_percent ? customer.avg_percent : "--"}
+                      {month === "0" ? (customer.avg_percent ? customer.avg_percent : "--") : null}
+                      {month !== "0" ? (customer.avg_percentile? customer.avg_percentile: "--") : null}
                     </TableCell>
                     <TableCell>
-                      {customer.aggr_percent ? customer.aggr_percent : "--"}
+                      {month === "0" ? (customer.aggr_percent ? customer.aggr_percent : "--") : null}
+                      {month !== "0" ? (customer.aggr_percentile? customer.aggr_percentile: "--") : null}
                     </TableCell>
                     <TableCell>
                       {customer.contests_played
@@ -360,15 +470,18 @@ function Results({ className, customers, ...rest }) {
       </AppBar>
     </React.Fragment>
   );
+  }
+  else 
+  {
+    return (
+        <LoadingScreen />
+    );   
+
+  }
 }
 
 Results.propTypes = {
   className: PropTypes.string,
-  customers: PropTypes.array,
-};
-
-Results.defaultProps = {
-  customers: [],
 };
 
 export default Results;
