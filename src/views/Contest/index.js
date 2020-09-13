@@ -52,7 +52,7 @@ function ContestView() {
   return (
     <Page className={classes.root} title="Contest" ref={pageRef}>
       <Box display={contestId ? "none" : "block"}>
-        <ContestList contests={contests} />
+        <ContestList contests={contests} setContests={setContests} />
       </Box>
       {contestId && <ContestDetail contestId={contestId} handles={handles} />}
     </Page>

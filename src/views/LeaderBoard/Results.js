@@ -191,7 +191,7 @@ function Results({ className,...rest }) {
   const [limit, setLimit] = React.useState(10);
   const [query, setQuery] = React.useState("");
   const [sort, setSort] = React.useState(sortOptions[0].value);
-  const [month, setMonth] = React.useState(monthOptions[0].value);
+  const [month, setMonth] = React.useState(monthOptions[monthOptions.length- 1].value);
   const [filters, setFilters] = React.useState({
     FE: null,
     SE: null,
@@ -213,8 +213,10 @@ function Results({ className,...rest }) {
    }
   }
 
-  React.useEffect(
-    getCustomers
+  React.useEffect(()=>{
+      setCustomers(null)
+      getCustomers()
+    }
   , [month]);
 
   const [openFilterModal, setOpenFilterModal] = React.useState(false);
@@ -350,7 +352,6 @@ function Results({ className,...rest }) {
           <FilterButton 
             variant="outlined" 
             fullWidth
-            color="textPrimary"    
             disableElevation
             onClick = {handleFilterModalOpen}>
               Filter
@@ -359,8 +360,7 @@ function Results({ className,...rest }) {
           <Grid item xs className={classes.gridItem}>
           <FilterButton 
             fullWidth
-            variant="outlined" 
-            color="textPrimary"    
+            variant="outlined"    
             disableElevation
             onClick = {handleSortModalOpen}>
               Sort

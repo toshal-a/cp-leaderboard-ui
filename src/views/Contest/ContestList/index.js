@@ -1,4 +1,5 @@
 import React from "react";
+import _ from "lodash";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
@@ -101,7 +102,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ContestList = React.memo(({ className, contests, ...rest }) => {
+const ContestList = React.memo(({ className, contests, setContests, ...rest }) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [limit, setLimit] = React.useState(10);
@@ -110,6 +111,36 @@ const ContestList = React.memo(({ className, contests, ...rest }) => {
     phase: "BEFORE",
     contestType: null,
   });
+  const [reverse, setReverse] = React.useState(true)
+  const [reverseContests, setReverseContests] = React.useState([])
+  const [filteredContests, setFilteredContests]  = React.useState(applyFilters(reverseContests, query, filters))
+  const [paginatedContests, setPaginatedContests] = React.useState(applyPagination(filteredContests, page, limit))
+
+  React.useEffect(() => {
+    setReverseContests(_.cloneDeep(contests).reverse())
+  }, [contests])
+
+  React.useEffect(() => {
+    if (filters.phase === "BEFORE") {
+      setReverse(true)
+    }
+    else {
+      setReverse(false)
+    }
+  }, [filters])
+
+  React.useEffect(() => {
+    if (reverse) {
+      setFilteredContests(applyFilters(reverseContests, query, filters))
+    }
+    else {
+      setFilteredContests(applyFilters(contests, query, filters))
+    }
+  }, [contests, reverseContests, reverse, query, filters])
+
+  React.useEffect(() => {
+    setPaginatedContests(applyPagination(filteredContests, page,limit))
+  }, [filteredContests, page, limit])
 
   const handleQueryChange = (event) => {
     event.persist();
@@ -146,10 +177,7 @@ const ContestList = React.memo(({ className, contests, ...rest }) => {
     setLimit(event.target.value);
   };
 
-  // Usually query is done on backend with indexing solutions
-  const filteredContests = applyFilters(contests, query, filters);
-  const paginatedContests = applyPagination(filteredContests, page, limit);
-
+  // Usually query is done on backend with indexing solutions.
   return (
     <React.Fragment>
       <AppBar position="static" color="transparent">
@@ -205,7 +233,7 @@ const ContestList = React.memo(({ className, contests, ...rest }) => {
       </AppBar>
       <Card className={clsx(classes.root, className)} {...rest}>
         <Divider />
-        <Grid container  direction={(filters.phase === "BEFORE") ? "column-reverse" : "column"}   alignContent="center" spacing={2}>
+        <Grid container  direction={"column"}   alignContent="center" spacing={2}>
           {paginatedContests.map((contest) => {
             return (
               <Grid key={contest.id} item  >
