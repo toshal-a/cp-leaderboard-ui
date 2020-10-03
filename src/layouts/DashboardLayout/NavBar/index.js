@@ -19,12 +19,17 @@ import Typography from "@material-ui/core/Typography";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Gravatar from 'react-gravatar';
 import {
-  Activity as ActivityIcon,
-  Trello as TrelloIcon,
-  User as UserIcon,
-  Flag as FlagIcon,
-  HelpCircle as HelpIcon,
-} from "react-feather";
+  FiActivity as ActivityIcon,
+  FiTrello as TrelloIcon,
+  FiUser as UserIcon,
+  FiFlag as FlagIcon,
+  FiHelpCircle as HelpIcon,
+} from "react-icons/fi"
+
+import {
+  AiOutlineHistory as HistoryIcon,
+} from "react-icons/ai"
+
 import Logo from "components/Logo";
 import NavItem from "./NavItem";
 
@@ -42,12 +47,11 @@ const navConfig = [
         href: "/app/contest",
         icon: FlagIcon,
       },
-     /* {
-        title: "Live Contest",
-        href: "/app/livecontest",
-        icon: ActivityIcon,
-        info: () => <Chip color="secondary" size="small" label="Coming Soon" />,
-      },*/
+      {
+        title: "Participation History",
+        href: "/app/history",
+        icon: HistoryIcon,
+      },
     ],
   },
   {

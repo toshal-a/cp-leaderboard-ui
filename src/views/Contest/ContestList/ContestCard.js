@@ -90,14 +90,16 @@ function ContestCard({ contest, className, ...rest }) {
             spacing={3}
             wrap="nowrap"
           >
-            <Grid item>
-              <Typography variant="h5" color="textPrimary" align="center">
-                {contest.type}
-              </Typography>
-              <Typography variant="body2" color="textSecondary" align="center">
-                Type
-              </Typography>
-            </Grid>
+            { 
+              contest.type && <Grid item>
+                <Typography variant="h5" color="textPrimary" align="center">
+                  {contest.type}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" align="center">
+                  Type
+                </Typography>
+              </Grid>
+            }
             <Grid item>
               <Typography variant="h5" color="textPrimary" align="center">
                 {moment
@@ -108,27 +110,29 @@ function ContestCard({ contest, className, ...rest }) {
                 Start Time
               </Typography>
             </Grid>
-            <Grid item>
+            {
+              contest.durationSeconds &&<Grid item>
               <Typography variant="h5" color="textPrimary" align="center">
                 {(contest.durationSeconds / 3600).toString() + "H"}
               </Typography>
               <Typography variant="body2" color="textSecondary" align="center">
                 Duration
               </Typography>
-            </Grid>
+              </Grid>
+            } 
           </Grid>
         </Box>
        
         <Divider />
         <Box py={2} pl={2} pr={3} display="flex" alignItems="center">
-          {getPhaseLabel(contest.phase)}
+          {contest.phase && getPhaseLabel(contest.phase)}
           <Box flexGrow={1} />
           <Button
             onClick={handleContestClick}
             variant="outlined"
             color="default"
             disabled={
-              contest.phase === "CODING" || contest.phase === "FINISHED"
+              !contest.phase || contest.phase === "CODING" || contest.phase === "FINISHED"
                 ? false
                 : true
             }

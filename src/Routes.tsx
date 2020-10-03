@@ -60,6 +60,11 @@ const routesConfig = [
       },
       {
         exact: true,
+        path: "/app/history",
+        component: React.lazy(() => import("views/History")),
+      },
+      {
+        exact: true,
         path: "/app/livecontest",
         component: React.lazy(() =>
           import("views/pages/UnderConstruction.jsx")
