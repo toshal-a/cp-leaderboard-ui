@@ -37,7 +37,7 @@ class AuthService {
     const formData = new FormData();
     formData.append('username',email);
     formData.append('password',password);
-    axios.post('https://api.cp-leaderboard.me/login/access-token',formData)
+    axios.post('https://api.cp-leaderboard.me/login/access-token', formData)
       .then((response) => {
           this.setSession(response.data.access_token);
           resolve(response.data.access_token);
