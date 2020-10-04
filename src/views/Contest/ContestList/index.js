@@ -100,6 +100,11 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(2),
     flexBasis: 200,
   },
+  gridContainer: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+    flexGrow: 1,
+  }
 }));
 
 const ContestList = React.memo(({ className, contests, setContests, ...rest }) => {
@@ -233,7 +238,7 @@ const ContestList = React.memo(({ className, contests, setContests, ...rest }) =
       </AppBar>
       <Card className={clsx(classes.root, className)} {...rest}>
         <Divider />
-        <Grid container  direction={"column"}   alignContent="center" spacing={2}>
+        <Grid className={classes.gridContainer} container  direction={"column"}   alignContent="center" spacing={2}>
           {paginatedContests.map((contest) => {
             return (
               <Grid key={contest.id} item  >

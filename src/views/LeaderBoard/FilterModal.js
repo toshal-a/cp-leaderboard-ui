@@ -28,6 +28,10 @@ const FilterDialogRaw = (props) => {
         value: "9",
         label: "September",
       },
+      {
+        value: "10",
+        label: "October"
+      }
     ];
   const { onClose, value: valueProp, open, ...other } = props;
   const [value, setValue] = React.useState(valueProp);

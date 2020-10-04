@@ -103,6 +103,10 @@ const monthOptions = [
     value: "9",
     label: "September",
   },
+  {
+    value: "10",
+    label: "October",
+  }
 ];
 
 function applyFilters(customers, query, filters) {
@@ -191,7 +195,7 @@ function Results({ className,...rest }) {
   const [limit, setLimit] = React.useState(10);
   const [query, setQuery] = React.useState("");
   const [sort, setSort] = React.useState(sortOptions[0].value);
-  const [month, setMonth] = React.useState(monthOptions[monthOptions.length- 1].value);
+  const [month, setMonth] = React.useState(monthOptions[0].value);
   const [filters, setFilters] = React.useState({
     FE: null,
     SE: null,
@@ -201,12 +205,12 @@ function Results({ className,...rest }) {
   });
   const getCustomers = () => {
     if (month === "0") {
-      axios.get("https://api.cp-leaderboard.me/user/").then((response) => {
+      axios.get("https://api.cp-leaderboard.me/user/?limit=200").then((response) => {
           setCustomers(response.data);
       })
    }
    else {
-    axios.get("https://api.cp-leaderboard.me/user/month?year=2020&month="
+    axios.get("https://api.cp-leaderboard.me/user/month?year=2020&limit=200&month="
         + month.toString()).then((response) => {
       setCustomers(response.data);
     })
